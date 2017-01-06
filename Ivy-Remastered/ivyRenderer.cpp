@@ -21,13 +21,8 @@ ivyRenderer::~ivyRenderer()
 }
 
 void ivyRenderer::Clear(ivyColor color) {
-    PFNGLCLEARPROC glClear = reinterpret_cast<PFNGLCLEARPROC>(eglGetProcAddress("glClear"));
-    if (glClear != nullptr)
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    
-    PFNGLCLEARCOLORPROC glClearColor = reinterpret_cast<PFNGLCLEARCOLORPROC>(eglGetProcAddress("glClearColor"));
-    if(glClearColor != nullptr)
-        glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 
 bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display)
@@ -35,7 +30,6 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
     PFNEGLGETPLATFORMDISPLAYEXTPROC eglGetPlatformDisplayEXT = reinterpret_cast<PFNEGLGETPLATFORMDISPLAYEXTPROC>(eglGetProcAddress("eglGetPlatformDisplayEXT"));
     if (!eglGetPlatformDisplayEXT) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
@@ -57,7 +51,6 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
             static_cast<const char *>(eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS));
         if (strstr(extensionString, "EGL_ANGLE_experimental_present_path") == nullptr) {
             Destroy();
-            std::cout << __LINE__ << std::endl;
             return false;
         }
 
@@ -73,14 +66,12 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
 
     if (m_Display == EGL_NO_DISPLAY) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
     EGLint majorVersion, minorVersion;
     if (eglInitialize(m_Display, &majorVersion, &minorVersion) == EGL_FALSE) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
@@ -90,14 +81,12 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
     bool hasKHRCreateContext = strstr(displayExtensions, "EGL_KHR_create_context") != nullptr;
     if (majorVersion != 2 && minorVersion != 0 && !hasKHRCreateContext) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
     eglBindAPI(EGL_OPENGL_ES_API);
     if (eglGetError() != EGL_SUCCESS) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
@@ -115,7 +104,6 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
     EGLint configCount;
     if (!eglChooseConfig(m_Display, configAttributes, &m_Config, 1, &configCount) || (configCount != 1)) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
@@ -137,7 +125,6 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
     m_Surface = eglCreateWindowSurface(m_Display, m_Config, window, &surfaceAttributes[0]);
     if (eglGetError() != EGL_SUCCESS) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
     assert(m_Surface != EGL_NO_SURFACE);
@@ -158,20 +145,22 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
     m_Context = eglCreateContext(m_Display, m_Config, nullptr, &contextAttributes[0]);
     if (eglGetError() != EGL_SUCCESS) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
     eglMakeCurrent(m_Display, m_Surface, m_Surface, m_Context);
     if (eglGetError() != EGL_SUCCESS) {
         Destroy();
-        std::cout << __LINE__ << std::endl;
         return false;
     }
 
     if (m_SwapInterval != -1) {
         eglSwapInterval(m_Display, m_SwapInterval);
     }
+
+    LoadGLEntryPoints();
+    std::cout << glGetString(GL_VERSION) << std::endl;
+    std::cout << glGetString(GL_RENDERER) << std::endl;
 
     return true;
 }
@@ -204,6 +193,7 @@ bool ivyRenderer::Initialized() {
 void ivyRenderer::Present() {
     eglSwapBuffers(m_Display, m_Surface);
 }
+
 void ivyRenderer::SetSwapInterval(EGLint interval) {
     eglSwapInterval(m_Display, interval);
     m_SwapInterval = interval;

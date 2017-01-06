@@ -1,5 +1,5 @@
-#ifndef IVYCOLOR_H
-#define IVYCOLOR_H
+#ifndef IVY_COLOR_H
+#define IVY_COLOR_H
 
 #include "ivySymbols.h"
 
@@ -56,4 +56,4 @@ private:
     float alpha;
 };
 
-#endif
+#endif // IVY_COLOR_H

@@ -1,0 +1,4 @@
+#ifndef IVY_INDEXBUFFER_H
+#define IVY_INDEXBUFFER_H
+
+#endif // IVY_INDEX_BUFFER

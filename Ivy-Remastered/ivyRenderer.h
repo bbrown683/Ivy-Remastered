@@ -1,26 +1,19 @@
-#ifndef IVYRENDERER_H
-#define IVYRENDERER_H
+#ifndef IVY_RENDERER_H
+#define IVY_RENDERER_H
 
 #include <assert.h>
 #include <vector>
 #include <iostream>
 
-// ANGLE includes.
-#include <export.h>
-#include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-
 #include "ivySymbols.h"
 #include "ivyColor.h"
+#include "ivyGL.h"
 
 class IVY_API ivyRenderer {
 public:
-    ivyRenderer(EGLint GLESVersionMajor, EGLint GLESVersionMinor, EGLint red, EGLint green, EGLint blue, EGLint alpha, EGLint depth, EGLint stencil, bool multisample, EGLint interval, bool debug);
+    ivyRenderer(EGLint GLESVersionMajor, EGLint GLESVersionMinor, EGLint red, EGLint green, 
+        EGLint blue, EGLint alpha, EGLint depth, EGLint stencil, bool multisample, 
+        EGLint interval, bool debug);
     ~ivyRenderer();
 
     void Clear(ivyColor color);
@@ -28,7 +21,6 @@ public:
     void Destroy();
     bool Initialized();
     void Present();
-    
 
     EGLint GetRenderer(void) { return m_Renderer; };
     EGLint GetRendererType(void) { return m_RendererType; };
@@ -61,6 +53,7 @@ public:
     EGLContext GetEGLContext() { return m_Context; };
 
 private:
+
     EGLint m_Renderer               = EGL_PLATFORM_ANGLE_TYPE_DEFAULT_ANGLE;
     EGLint m_RendererType           = EGL_DONT_CARE;
     EGLint m_RendererVersionMajor   = EGL_DONT_CARE;
@@ -87,4 +80,4 @@ private:
     EGLContext m_Context;
 };
 
-#endif // IVYRENDERER_H
+#endif // IVY_RENDERER_H

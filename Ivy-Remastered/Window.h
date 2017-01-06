@@ -1,3 +1,6 @@
+#ifndef IVY_WINDOW_H
+#define IVY_WINDOW_H
+
 #include <Windows.h>
 
 #include <string>
@@ -47,3 +50,5 @@ public:
     LRESULT WindowEventHandler(UINT msg, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 };
+
+#endif // IVY_WINDOW_H

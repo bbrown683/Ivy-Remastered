@@ -5,11 +5,20 @@
     <ClInclude Include="ivySymbols.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="ivyColor.h" />
+    <ClInclude Include="ivyGL.h" />
+    <ClInclude Include="ivyVertexBuffer.h" />
+    <ClInclude Include="ivyIndexBuffer.h" />
+    <ClInclude Include="ivyUniformBuffer.h" />
+    <ClInclude Include="ivyShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ivyRenderer.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ivyColor.cpp" />
+    <ClCompile Include="ivyVertexBuffer.cpp" />
+    <ClCompile Include="ivyIndexBuffer.cpp" />
+    <ClCompile Include="ivyUniformBuffer.cpp" />
+    <ClCompile Include="ivyShader.cpp" />
   </ItemGroup>
 </Project>

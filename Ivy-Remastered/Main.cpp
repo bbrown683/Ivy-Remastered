@@ -3,7 +3,7 @@
 
 int main()
 {
-    Window window(1080, 720, 10, 10, "test", false);
+    Window window(1080, 720, 100, 100, "test", false);
     if (window.Create())
     {
         ivyRenderer renderer(2, 0, 8, 8, 8, 8, 24, 8, false, 0, false);

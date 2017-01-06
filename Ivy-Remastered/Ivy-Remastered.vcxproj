@@ -147,13 +147,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ivyColor.h" />
+    <ClInclude Include="ivyGL.h" />
+    <ClInclude Include="ivyIndexBuffer.h" />
+    <ClInclude Include="ivyShader.h" />
     <ClInclude Include="ivySymbols.h" />
     <ClInclude Include="ivyRenderer.h" />
+    <ClInclude Include="ivyUniformBuffer.h" />
+    <ClInclude Include="ivyVertexBuffer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ivyColor.cpp" />
+    <ClCompile Include="ivyIndexBuffer.cpp" />
     <ClCompile Include="ivyRenderer.cpp" />
+    <ClCompile Include="ivyShader.cpp" />
+    <ClCompile Include="ivyUniformBuffer.cpp" />
+    <ClCompile Include="ivyVertexBuffer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>

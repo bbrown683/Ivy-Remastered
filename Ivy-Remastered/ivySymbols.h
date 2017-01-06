@@ -1,5 +1,5 @@
-#ifndef IVYAPI_H
-#define IVYAPI_H
+#ifndef IVY_SYMBOLS_H
+#define IVY_SYMBOLS_H
 
 #ifndef IVY_STATIC_BUILD
     #ifdef IVY_EXPORT_SYMBOLS
@@ -11,4 +11,4 @@
     #define IVY_API
 #endif  // IVY_STATIC_BUILD
 
-#endif // IVYAPI_H
+#endif // IVY_SYMBOLS_H
