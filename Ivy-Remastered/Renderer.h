@@ -5,30 +5,42 @@
 #include <vector>
 #include <iostream>
 
-#include "ivySymbols.h"
-#include "ivyColor.h"
-#include "ivyGL.h"
+#ifndef GL_GLEXT_PROTOTYPES
+#define GL_GLEXT_PROTOTYPES 1
+#endif 
 
-class IVY_API ivyRenderer {
+#include <export.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl31.h>
+#include <GLES3/gl32.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+#include "Symbols.h"
+#include "Color.h"
+
+class IVY_API Renderer {
 public:
-    ivyRenderer(EGLint GLESVersionMajor, EGLint GLESVersionMinor, EGLint red, EGLint green, 
+    Renderer(EGLint GLESVersionMajor, EGLint GLESVersionMinor, EGLint red, EGLint green, 
         EGLint blue, EGLint alpha, EGLint depth, EGLint stencil, bool multisample, 
         EGLint interval, bool debug);
-    ~ivyRenderer();
+    ~Renderer();
 
-    void Clear(ivyColor color);
+    void Clear(Color color);
     bool Create(EGLNativeWindowType window, EGLNativeDisplayType display);
-    void Destroy();
-    bool Initialized();
-    void Present();
+    void Destroy(void);
+    bool Initialized(void);
+    void Present(void);
 
     EGLint GetRenderer(void) { return m_Renderer; };
     EGLint GetRendererType(void) { return m_RendererType; };
     EGLint GetVersionMajor(void) { return m_RendererVersionMajor; };
     EGLint GetVersionMinor(void) { return m_RendererVersionMinor; };
     
-    EGLint GetGLESVersionMajor() { return m_GLESVersionMajor; };
-    EGLint GetGLESVersionMinor() { return m_GLESVersionMinor; };
+    EGLint GetGLESVersionMajor(void) { return m_GLESVersionMajor; };
+    EGLint GetGLESVersionMinor(void) { return m_GLESVersionMinor; };
 
     EGLint GetRedBits(void) { return m_RedBits; }
     void SetRedBits(EGLint bits) { m_RedBits = bits; }
@@ -47,10 +59,10 @@ public:
     EGLint GetSwapInverval(void) { return m_SwapInterval; }
     void SetSwapInterval(EGLint interval);
     
-    EGLConfig GetEGLConfig() { return m_Config; };
-    EGLDisplay GetEGLDisplay() { return m_Display; };
-    EGLSurface GetEGLSurface() { return m_Surface; };
-    EGLContext GetEGLContext() { return m_Context; };
+    EGLConfig GetEGLConfig(void) { return m_Config; };
+    EGLDisplay GetEGLDisplay(void) { return m_Display; };
+    EGLSurface GetEGLSurface(void) { return m_Surface; };
+    EGLContext GetEGLContext(void) { return m_Context; };
 
 private:
 

@@ -1,24 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="ivyRenderer.h" />
-    <ClInclude Include="ivySymbols.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="ivyColor.h" />
-    <ClInclude Include="ivyGL.h" />
-    <ClInclude Include="ivyVertexBuffer.h" />
-    <ClInclude Include="ivyIndexBuffer.h" />
-    <ClInclude Include="ivyUniformBuffer.h" />
-    <ClInclude Include="ivyShader.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Symbols.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="UniformBuffer.h" />
+    <ClInclude Include="VertexBuffer.h" />
+    <ClInclude Include="IndexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ivyRenderer.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ivyColor.cpp" />
-    <ClCompile Include="ivyVertexBuffer.cpp" />
-    <ClCompile Include="ivyIndexBuffer.cpp" />
-    <ClCompile Include="ivyUniformBuffer.cpp" />
-    <ClCompile Include="ivyShader.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="UniformBuffer.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
   </ItemGroup>
 </Project>

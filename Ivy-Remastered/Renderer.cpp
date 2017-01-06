@@ -1,6 +1,6 @@
-#include "ivyRenderer.h"
+#include "Renderer.h"
 
-ivyRenderer::ivyRenderer(EGLint GLESVersionMajor, EGLint GLESVersionMinor, EGLint red, EGLint green, EGLint blue, EGLint alpha, EGLint depth,
+Renderer::Renderer(EGLint GLESVersionMajor, EGLint GLESVersionMinor, EGLint red, EGLint green, EGLint blue, EGLint alpha, EGLint depth,
     EGLint stencil, bool multisample, EGLint interval, bool debug) {
     this->m_GLESVersionMajor = GLESVersionMajor;
     this->m_GLESVersionMinor = GLESVersionMinor;
@@ -15,17 +15,17 @@ ivyRenderer::ivyRenderer(EGLint GLESVersionMajor, EGLint GLESVersionMinor, EGLin
     this->m_DebugMode = debug;
 }
 
-ivyRenderer::~ivyRenderer()
+Renderer::~Renderer(void)
 {
-    ivyRenderer::Destroy();
+    Renderer::Destroy();
 }
 
-void ivyRenderer::Clear(ivyColor color) {
+void Renderer::Clear(Color color) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+    glClearColor(color.GetRedChannel(), color.GetGreenChannel(), color.GetBlueChannel(), color.GetAlphaChannel());
 }
 
-bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display)
+bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display)
 {
     PFNEGLGETPLATFORMDISPLAYEXTPROC eglGetPlatformDisplayEXT = reinterpret_cast<PFNEGLGETPLATFORMDISPLAYEXTPROC>(eglGetProcAddress("eglGetPlatformDisplayEXT"));
     if (!eglGetPlatformDisplayEXT) {
@@ -158,14 +158,13 @@ bool ivyRenderer::Create(EGLNativeWindowType window, EGLNativeDisplayType displa
         eglSwapInterval(m_Display, m_SwapInterval);
     }
 
-    LoadGLEntryPoints();
     std::cout << glGetString(GL_VERSION) << std::endl;
     std::cout << glGetString(GL_RENDERER) << std::endl;
 
     return true;
 }
 
-void ivyRenderer::Destroy()
+void Renderer::Destroy(void)
 {
     if (m_Surface != EGL_NO_SURFACE) {
         assert(m_Display != EGL_NO_DISPLAY);
@@ -184,17 +183,17 @@ void ivyRenderer::Destroy()
     }
 }
 
-bool ivyRenderer::Initialized() {
+bool Renderer::Initialized(void) {
     return m_Surface != EGL_NO_SURFACE &&
         m_Context != EGL_NO_CONTEXT &&
         m_Display != EGL_NO_DISPLAY;
 }
 
-void ivyRenderer::Present() {
+void Renderer::Present(void) {
     eglSwapBuffers(m_Display, m_Surface);
 }
 
-void ivyRenderer::SetSwapInterval(EGLint interval) {
+void Renderer::SetSwapInterval(EGLint interval) {
     eglSwapInterval(m_Display, interval);
     m_SwapInterval = interval;
 }

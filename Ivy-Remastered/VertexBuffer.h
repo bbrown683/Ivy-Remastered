@@ -1,11 +1,11 @@
 #ifndef IVY_VERTEXBUFFER_H
 #define IVY_VERTEXBUFFER_H
 
-#include "ivyRenderer.h"
+#include "Renderer.h"
 
-class ivyVertexBuffer {
+class VertexBuffer {
 public:
-    ivyVertexBuffer(ivyRenderer renderer) {
+    VertexBuffer(Renderer renderer) {
 
     }
     
