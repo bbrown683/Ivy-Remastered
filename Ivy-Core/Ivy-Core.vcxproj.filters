@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Symbols.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="UniformBuffer.h" />
+    <ClInclude Include="VertexBuffer.h" />
+    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="Program.h" />
+    <ClInclude Include="File.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="UniformBuffer.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="File.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="frag.txt" />
+    <Text Include="vert.txt" />
+  </ItemGroup>
+</Project>

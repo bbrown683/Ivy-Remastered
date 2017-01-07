@@ -1,1 +1,8 @@
-# Ivy-Remastered
+# Ivy
+
+# Dependencies 
+ANGLE
+Assimp
+FreeImage
+FreeType
+GLM 
