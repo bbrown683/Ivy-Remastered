@@ -82,7 +82,7 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
         const char *extensionString = static_cast<const char *>(eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS));
         // EGL_ANGLE_experimental_present_path
         // https://github.com/google/angle/blob/master/extensions/EGL_ANGLE_experimental_present_path.txt
-        if (strstr(extensionString, "EGL_ANGLE_experimental_present_path") == nullptr) {
+        if (!strstr(extensionString, "EGL_ANGLE_experimental_present_path")) {
             Destroy();
             return false;
         }
@@ -102,6 +102,14 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
     // Get GLES version that was initialized with our display.
     EGLint majorVersion, minorVersion;
     if (eglInitialize(m_Display, &majorVersion, &minorVersion) == EGL_FALSE) {
+        Destroy();
+        return false;
+    }
+
+    const char* displayExtensions = eglQueryString(m_Display, EGL_EXTENSIONS);
+    // EGL_KHR_create_context is required to request a non-ES2 context.
+    bool KHRCreateContext = strstr(displayExtensions, "EGL_KHR_create_context") != nullptr;
+    if (majorVersion != 2 && minorVersion != 0 && !KHRCreateContext) {
         Destroy();
         return false;
     }
@@ -141,28 +149,18 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
     eglGetConfigAttrib(m_Display, m_Config, EGL_DEPTH_SIZE, &m_DepthBits);
     eglGetConfigAttrib(m_Display, m_Config, EGL_STENCIL_SIZE, &m_StencilBits);
 
-    // NVIDIA extension check.
-    const char* displayExtensions = eglQueryString(m_Display, EGL_EXTENSIONS);
-    std::vector<EGLint> surfaceAttributes;
-    if (strstr(displayExtensions, "EGL_NV_post_sub_buffer") != nullptr) {
-        surfaceAttributes.push_back(EGL_POST_SUB_BUFFER_SUPPORTED_NV);
-        surfaceAttributes.push_back(EGL_TRUE);
-    }
-    surfaceAttributes.push_back(EGL_NONE);
-
     // Creates the surface for the display with the specified configuration and surface attributes.
-    m_Surface = eglCreateWindowSurface(m_Display, m_Config, window, &surfaceAttributes[0]);
+    m_Surface = eglCreateWindowSurface(m_Display, m_Config, window, nullptr);
     if (eglGetError() != EGL_SUCCESS) {
         Destroy();
         return false;
     }
 
     // Set the GLES context attributes.
-    // Using GLES v2.0 for portability and stability.
     std::vector<EGLint> contextAttributes;
-    contextAttributes.push_back(EGL_CONTEXT_MAJOR_VERSION);
-    contextAttributes.push_back(2);
-    contextAttributes.push_back(EGL_CONTEXT_MINOR_VERSION);
+    contextAttributes.push_back(EGL_CONTEXT_MAJOR_VERSION_KHR);
+    contextAttributes.push_back(3);
+    contextAttributes.push_back(EGL_CONTEXT_MINOR_VERSION_KHR);
     contextAttributes.push_back(0);
     contextAttributes.push_back(EGL_CONTEXT_OPENGL_DEBUG);
     contextAttributes.push_back(m_DebugEnabled ? EGL_TRUE : EGL_FALSE);
