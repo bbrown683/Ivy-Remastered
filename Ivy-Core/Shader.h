@@ -33,8 +33,8 @@ SOFTWARE.
 
 class IVY_API Shader {
 public:
-    Shader(std::string path, GLenum shaderType) {
-        this->m_ShaderPath = path;
+    Shader(std::string shaderPath, GLenum shaderType) {
+        this->m_ShaderPath = shaderPath;
         this->m_ShaderType = shaderType;
     }
     ~Shader();

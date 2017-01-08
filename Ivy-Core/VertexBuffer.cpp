@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "VertexBuffer.h"
 
-void VertexBuffer::Bind(GLfloat* vertices) {    
+void VertexBuffer::Bind(GLfloat* vertices) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vertices);
     glEnableVertexAttribArray(0);
 }

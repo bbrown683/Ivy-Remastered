@@ -7,14 +7,19 @@ Program::~Program() {
 
 bool Program::Create() {
     m_ProgramID = glCreateProgram();
-    if (m_ProgramID == GL_NO_ERROR) {
+    if (m_ProgramID == 0) {
         std::cout << "Program creation failed..." << std::endl;
         return false;
     }
 
-    for each (Shader shader in m_Shaders)
+    for each (Shader shader in m_Shaders) {
         glAttachShader(m_ProgramID, shader.GetShaderID());
-    
+        GLenum error = glGetError();
+        if (error != GL_NO_ERROR) {
+            std::cout << "Shader " << shader.GetShaderPath() << " failed to attach with error: " << error << std::endl;
+        }
+    }
+
     glLinkProgram(m_ProgramID);
     GLint linkStatus;
     glGetProgramiv(m_ProgramID, GL_LINK_STATUS, &linkStatus);

@@ -21,7 +21,7 @@ std::string File::Read(std::string filePath) {
 
     std::vector<char>buffer(size + 1);
     fread(buffer.data(), size, 1, m_pFile);
-    buffer[size] = 0;
+    buffer[size] = '\0';
     fclose(m_pFile);
 
     // Return string after assignment.

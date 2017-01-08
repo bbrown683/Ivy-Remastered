@@ -106,6 +106,7 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
         return false;
     }
 
+#ifdef USE_GL_ES_3_0
     const char* displayExtensions = eglQueryString(m_Display, EGL_EXTENSIONS);
     // EGL_KHR_create_context is required to request a non-ES2 context.
     bool KHRCreateContext = strstr(displayExtensions, "EGL_KHR_create_context") != nullptr;
@@ -113,6 +114,7 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
         Destroy();
         return false;
     }
+#endif
 
     // Bind OpenGL ES API for ANGLE use.
     eglBindAPI(EGL_OPENGL_ES_API);
@@ -158,10 +160,17 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
 
     // Set the GLES context attributes.
     std::vector<EGLint> contextAttributes;
+#ifdef USE_GL_ES_3_0
     contextAttributes.push_back(EGL_CONTEXT_MAJOR_VERSION_KHR);
     contextAttributes.push_back(3);
     contextAttributes.push_back(EGL_CONTEXT_MINOR_VERSION_KHR);
     contextAttributes.push_back(0);
+#else
+    contextAttributes.push_back(EGL_CONTEXT_MAJOR_VERSION);
+    contextAttributes.push_back(2);
+    contextAttributes.push_back(EGL_CONTEXT_MINOR_VERSION);
+    contextAttributes.push_back(0);
+#endif
     contextAttributes.push_back(EGL_CONTEXT_OPENGL_DEBUG);
     contextAttributes.push_back(m_DebugEnabled ? EGL_TRUE : EGL_FALSE);
     contextAttributes.push_back(EGL_NONE);
@@ -176,6 +185,12 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
     // Lastly activate the context.
     eglMakeCurrent(m_Display, m_Surface, m_Surface, m_Context);
     if (eglGetError() != EGL_SUCCESS) {
+        Destroy();
+        return false;
+    }
+
+    const unsigned char* glExtensions = glGetString(GL_EXTENSIONS);
+    if (!strstr(reinterpret_cast<const char*>(glExtensions), "GL_OES_vertex_array_object")) {
         Destroy();
         return false;
     }

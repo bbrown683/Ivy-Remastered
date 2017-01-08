@@ -31,39 +31,51 @@ Shader::~Shader() {
 
 bool Shader::Create() {
     m_ShaderID = glCreateShader(m_ShaderType);
-    if (m_ShaderID == GL_NO_ERROR) {
-        std::cout << "Shader creation failed..." << std::endl;
+    if (m_ShaderID == 0) {
+        std::cerr << "Shader creation failed for " << m_ShaderPath;;
         return false;
     }
 
+    // Read the shader and check to see if it is empty.
+    // Empty signifies the file could not be found or there was no data.
     File file;
     m_ShaderSource = file.Read(m_ShaderPath);
-    const char* source = m_ShaderSource.c_str();
-    glShaderSource(m_ShaderID, 1, &source, nullptr);
-    if (glGetError() != GL_NO_ERROR)
-        std::cerr << "Failed to set source for " << m_ShaderPath << "...\n";
+    if (m_ShaderSource.empty()) {
+        Destroy();
+        return false;
+    }
+
+    // Convert the std::string into an OpenGL friendly format.
+    const GLchar* glData = m_ShaderSource.c_str();
+    glShaderSource(m_ShaderID, 1, &glData, nullptr);
+    if (glGetError() != GL_NO_ERROR) {
+        std::cerr << "Failed to set source for " << m_ShaderPath << "...";
+        Destroy();
+        return false;
+    }
 
     glCompileShader(m_ShaderID);
     GLint compileStatus;
-    glGetProgramiv(m_ShaderID, GL_COMPILE_STATUS, &compileStatus);
+    glGetShaderiv(m_ShaderID, GL_COMPILE_STATUS, &compileStatus);
     if (compileStatus == GL_FALSE) {
         GLint infoLogLength;
-        glGetProgramiv(m_ShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
+        glGetShaderiv(m_ShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
 
         if (infoLogLength > 1) {
             std::vector<GLchar>infoLog(infoLogLength);
-            glGetProgramInfoLog(m_ShaderID, static_cast<GLsizei>(infoLog.size()), nullptr, &infoLog[0]);
+            glGetShaderInfoLog(m_ShaderID, static_cast<GLsizei>(infoLog.size()), nullptr, &infoLog[0]);
 
-            std::cerr << "Shader " << m_ShaderPath << " failed to compile with error: " << &infoLog[0];
+            std::cerr << m_ShaderPath << " failed to compile with error: " << &infoLog[0];
         }
         else
-            std::cerr << "Shader " << m_ShaderPath << " failed to compile...";
-
+            std::cerr << m_ShaderPath << " failed to compile...";
+    
+        Destroy();
         return false;
     }
 
-
-
+    std::cout << m_ShaderPath << " was created and compiled successfully..." << std::endl;
+    
     return true;
 }
 
