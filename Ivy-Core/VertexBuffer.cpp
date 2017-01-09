@@ -24,13 +24,17 @@ SOFTWARE.
 
 #include "VertexBuffer.h"
 
-void VertexBuffer::Bind(GLfloat* vertices) {
+void VertexBuffer::Bind(GLfloat* vertices, GLfloat* colors) {    
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vertices);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, colors);
+    glEnableVertexAttribArray(1);
 }
 
 void VertexBuffer::Unbind() {
     glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 }
 
 void VertexBuffer::Draw() {

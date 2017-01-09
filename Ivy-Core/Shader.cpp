@@ -74,8 +74,6 @@ bool Shader::Create() {
         return false;
     }
 
-    std::cout << m_ShaderPath << " was created and compiled successfully..." << std::endl;
-    
     return true;
 }
 

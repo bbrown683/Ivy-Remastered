@@ -2,6 +2,7 @@
 #include "Shader.h"
 #include "Program.h"
 #include "VertexBuffer.h"
+#include "ElementBuffer.h"
 #include "Window.h"
 
 int main()
@@ -30,15 +31,27 @@ int main()
             0.5f, -0.5f, 0.0f,
         };
 
-        VertexBuffer vBuffer;
-        vBuffer.Bind(vertices);
+        GLfloat colors[] =
+        {
+            1.0f, 0.0f, 0.0f, 1.0f,
+            0.0f, 1.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f, 1.0f
+        };
+
+        VertexBuffer vBuffer(program);
+        vBuffer.Bind(vertices, colors);
+
+        GLushort indices[] = { 0, 1, 2 };
+
+        ElementBuffer eBuffer;
+        eBuffer.Bind(indices);
 
         while (window.open)
         {
             renderer.Clear(Color::CornflowerBlue);
 
             program.MakeActive();
-            vBuffer.Draw();
+            eBuffer.Draw();
             program.MakeInactive();
 
             renderer.SwapBuffers();

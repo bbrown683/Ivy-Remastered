@@ -25,4 +25,10 @@ SOFTWARE.
 #ifndef IVY_UNIFORMBUFFER_H
 #define IVY_UNIFORMBUFFER_H
 
+class UniformBuffer {
+public:
+    void Bind();
+    void Unbind();
+};
+
 #endif // IVY_UNIFORMBUFFER_H

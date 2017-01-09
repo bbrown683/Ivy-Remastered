@@ -155,7 +155,7 @@ xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"</Command>
   <ItemGroup>
     <ClInclude Include="Color.h" />
     <ClInclude Include="File.h" />
-    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="ElementBuffer.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Symbols.h" />
@@ -167,7 +167,7 @@ xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"</Command>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="File.cpp" />
-    <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="ElementBuffer.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
