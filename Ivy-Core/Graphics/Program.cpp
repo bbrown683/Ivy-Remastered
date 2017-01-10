@@ -1,11 +1,35 @@
+/*
+MIT License
+
+Copyright (c) 2017 Ben Brown
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "Program.h"
 
-Program::~Program() {
+Ivy::Graphics::Program::~Program() {
     if(!m_Disposed)
         Program::Destroy();
 }
 
-bool Program::Create(void) {
+bool Ivy::Graphics::Program::Create(void) {
     m_VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     m_FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
     if (m_VertexShaderID == 0 || m_FragmentShaderID == 0) {
@@ -86,25 +110,25 @@ bool Program::Create(void) {
     return true;
 }
 
-void Program::Destroy(void) {
+void Ivy::Graphics::Program::Destroy(void) {
     glDeleteShader(m_VertexShaderID);
     glDeleteShader(m_FragmentShaderID);
     glDeleteProgram(m_ProgramID);
     m_Disposed = true;
 }
 
-void Program::MakeActive(void) {
+void Ivy::Graphics::Program::MakeActive(void) {
     glUseProgram(m_ProgramID);
 }
 
-void Program::MakeInactive(void) {
+void Ivy::Graphics::Program::MakeInactive(void) {
     glUseProgram(0);
 }
 
-bool Program::SetShaderSource(GLuint shaderID, std::string shaderPath, std::string* shaderSource) {
+bool Ivy::Graphics::Program::SetShaderSource(GLuint shaderID, std::string shaderPath, std::string* shaderSource) {
     // Read the shader and check to see if it is empty.
     // Empty signifies the file could not be found or there was no data.
-    File file;
+    IO::File file;
     *shaderSource = file.Read(shaderPath);
     if (shaderSource->empty()) {
         Destroy();
@@ -122,7 +146,7 @@ bool Program::SetShaderSource(GLuint shaderID, std::string shaderPath, std::stri
     return true;
 }
 
-bool Program::ValidateShader(GLuint shaderID) {
+bool Ivy::Graphics::Program::ValidateShader(GLuint shaderID) {
     GLint compileStatus;
     glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
     if (compileStatus == GL_FALSE) {
@@ -145,7 +169,7 @@ bool Program::ValidateShader(GLuint shaderID) {
     return true;
 }
 
-bool Program::ValidateProgramStage(GLuint programID, GLenum stage) {
+bool Ivy::Graphics::Program::ValidateProgramStage(GLuint programID, GLenum stage) {
     GLint stageStatus;
     glGetProgramiv(m_ProgramID, stage, &stageStatus);
     if (stageStatus == GL_FALSE) {

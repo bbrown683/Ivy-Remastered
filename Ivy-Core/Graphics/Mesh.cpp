@@ -22,25 +22,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef IVY_VERTEXBUFFER_H
-#define IVY_VERTEXBUFFER_H
-
-#include "Renderer.h"
-#include "Vertex.h"
-
-class IVY_API VertexBuffer {
-public:
-    void Bind(void);
-    void Create(void);
-    void SetVertices(std::vector<Vertex> vertices);
-    void Unbind(void);
-
-    void Draw(void);
-
-private:
-    GLuint m_VertexArray;
-    GLuint m_VertexBuffer;
-    std::vector<Vertex> m_Vertices;
-};
-
-#endif // IVY_VERTEXBUFFER_H
+#include "Mesh.h"

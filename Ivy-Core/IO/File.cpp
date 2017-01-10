@@ -1,6 +1,6 @@
 #include "File.h"
 
-std::string File::Read(std::string filePath) {
+std::string Ivy::IO::File::Read(std::string filePath) {
     // Uses the C API for reading files.
     // MSVC wants use to use the secure alternative.
 #ifdef _MSC_VER

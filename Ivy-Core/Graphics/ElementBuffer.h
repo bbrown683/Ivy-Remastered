@@ -22,16 +22,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef IVY_UNIFORMBUFFER_H
-#define IVY_UNIFORMBUFFER_H
+#ifndef IVY_INDEXBUFFER_H
+#define IVY_INDEXBUFFER_H
 
-#include "Symbols.h"
 #include "Renderer.h"
 
-class IVY_API UniformBuffer {
-public:
-    void Bind(void);
-    void Unbind(void);
-};
+namespace Ivy {
+    namespace Graphics {
+        class IVY_API ElementBuffer {
+        public:
+            void Bind(void);
+            void Create(void);
+            void Destroy(void);
+            void SetIndices(std::vector<GLushort> indices);
+            void Unbind(void);
 
-#endif // IVY_UNIFORMBUFFER_H
+            void Draw(void);
+
+        private:
+
+            GLuint m_ElementBuffer;
+            std::vector<GLushort> m_Indices;
+        };
+    }
+}
+#endif // IVY_INDEXBUFFER_H

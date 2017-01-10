@@ -24,7 +24,9 @@ SOFTWARE.
 
 #include "VertexBuffer.h"
 
-void VertexBuffer::Bind() {
+void Ivy::Graphics::VertexBuffer::Bind(void) {
+    glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+    
     // See Program.cpp for the vertex shader attribute binding's
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Position)));
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Color0)));
@@ -47,7 +49,7 @@ void VertexBuffer::Bind() {
         glEnableVertexAttribArray(i);
 }
 
-void VertexBuffer::Create() {
+void Ivy::Graphics::VertexBuffer::Create(void) {
     glGenVertexArraysOES(1, &m_VertexArray);
     glBindVertexArrayOES(m_VertexArray);
 
@@ -56,19 +58,22 @@ void VertexBuffer::Create() {
     glBufferData(GL_ARRAY_BUFFER, m_Vertices.size() * sizeof(Vertex), m_Vertices.data(), GL_STATIC_DRAW);
 }
 
-void VertexBuffer::SetVertices(std::vector<Vertex> vertices) {
-    this->m_Vertices = vertices;
-}
-
-void VertexBuffer::Unbind() {
-    for (GLuint i = 0; i < 16; i++)
-        glDisableVertexAttribArray(i);
-
-    glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+void Ivy::Graphics::VertexBuffer::Destroy(void) {
     glDeleteBuffers(1, &m_VertexBuffer);
     glDeleteVertexArraysOES(1, &m_VertexArray);
 }
 
-void VertexBuffer::Draw() {
+void Ivy::Graphics::VertexBuffer::SetVertices(std::vector<Vertex> vertices) {
+    this->m_Vertices = vertices;
+}
+
+void Ivy::Graphics::VertexBuffer::Unbind(void) {
+    for (GLuint i = 0; i < 16; i++)
+        glDisableVertexAttribArray(i);
+
+    glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+}
+
+void Ivy::Graphics::VertexBuffer::Draw(void) {
     glDrawArrays(GL_TRIANGLES, 0, m_Vertices.size());
 }

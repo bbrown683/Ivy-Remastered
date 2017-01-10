@@ -2,31 +2,32 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Window.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Symbols.h" />
-    <ClInclude Include="UniformBuffer.h" />
-    <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="Program.h" />
-    <ClInclude Include="File.h" />
-    <ClInclude Include="ElementBuffer.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Graphics\Model.h" />
+    <ClInclude Include="Graphics\Renderer.h" />
+    <ClInclude Include="Graphics\Program.h" />
+    <ClInclude Include="Graphics\VertexBuffer.h" />
+    <ClInclude Include="Graphics\Vertex.h" />
+    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Graphics\Mesh.h" />
+    <ClInclude Include="Graphics\ElementBuffer.h" />
+    <ClInclude Include="Graphics\UniformBuffer.h" />
+    <ClInclude Include="IO\File.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Color.cpp" />
-    <ClCompile Include="UniformBuffer.cpp" />
-    <ClCompile Include="VertexBuffer.cpp" />
-    <ClCompile Include="Program.cpp" />
-    <ClCompile Include="File.cpp" />
-    <ClCompile Include="ElementBuffer.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Graphics\Model.cpp" />
+    <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Graphics\Program.cpp" />
+    <ClCompile Include="Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Mesh.cpp" />
+    <ClCompile Include="Graphics\ElementBuffer.cpp" />
+    <ClCompile Include="Graphics\UniformBuffer.cpp" />
+    <ClCompile Include="Graphics\Texture.cpp" />
+    <ClCompile Include="IO\File.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />

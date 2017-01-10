@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "Renderer.h"
 
-Renderer::Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alphaBits, EGLint depthBits, EGLint stencilBits,
+Ivy::Graphics::Renderer::Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alphaBits, EGLint depthBits, EGLint stencilBits,
     EGLint swapInterval, bool enableMultisampling, bool enableDebug) {
     this->m_RedBits = redBits;
     this->m_GreenBits = greenBits;
@@ -37,22 +37,22 @@ Renderer::Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alp
     this->m_DebugEnabled = enableDebug;
 }
 
-Renderer::~Renderer(void) {
+Ivy::Graphics::Renderer::~Renderer(void) {
     Renderer::Destroy();
 }
 
-void Renderer::AdjustViewport(unsigned int width, unsigned int height) {
+void Ivy::Graphics::Renderer::AdjustViewport(unsigned int width, unsigned int height) {
     // On the event of a window resize we need to also fix the viewport.
     glViewport(0, 0, width, height);
 }
 
-void Renderer::Clear(Color color) {
+void Ivy::Graphics::Renderer::Clear(Color color) {
     // Clear each buffer and set the back buffer to a specific color.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glClearColor(color.GetRedChannel(), color.GetGreenChannel(), color.GetBlueChannel(), color.GetAlphaChannel());
 }
 
-bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) {
+bool Ivy::Graphics::Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) {
     // Function pointer for retrieving the display.
     PFNEGLGETPLATFORMDISPLAYEXTPROC eglGetPlatformDisplayEXT = reinterpret_cast
         <PFNEGLGETPLATFORMDISPLAYEXTPROC>(eglGetProcAddress("eglGetPlatformDisplayEXT"));
@@ -187,7 +187,7 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
     return true;
 }
 
-void Renderer::Destroy(void) {
+void Ivy::Graphics::Renderer::Destroy(void) {
     if (m_Surface != EGL_NO_SURFACE) {
         assert(m_Display != EGL_NO_DISPLAY);
         eglDestroySurface(m_Display, m_Surface);
@@ -205,19 +205,19 @@ void Renderer::Destroy(void) {
     }
 }
 
-bool Renderer::IsInitialized(void) {
+bool Ivy::Graphics::Renderer::IsInitialized(void) {
     // Determines if the renderer is initialized.
     return m_Surface != EGL_NO_SURFACE &&
         m_Context != EGL_NO_CONTEXT &&
         m_Display != EGL_NO_DISPLAY;
 }
 
-void Renderer::SwapBuffers(void) {
+void Ivy::Graphics::Renderer::SwapBuffers(void) {
     // Swaps the front and back buffer.
     eglSwapBuffers(m_Display, m_Surface);
 }
 
-void Renderer::SetSwapInterval(EGLint interval) {
+void Ivy::Graphics::Renderer::SetSwapInterval(EGLint interval) {
     // For more information on swap intervals, read the following:
     // https://www.khronos.org/opengl/wiki/Swap_Interval
     eglSwapInterval(m_Display, interval);

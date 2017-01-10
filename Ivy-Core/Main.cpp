@@ -1,8 +1,10 @@
-#include "Renderer.h"
-#include "Program.h"
-#include "VertexBuffer.h"
-#include "ElementBuffer.h"
+#include "Graphics/Renderer.h"
+#include "Graphics/Program.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/ElementBuffer.h"
 #include "Window.h"
+
+using namespace Ivy::Graphics;
 
 int main()
 {
@@ -43,27 +45,31 @@ int main()
         vBuffer.SetVertices(vertices);
         vBuffer.Create();
 
-        vBuffer.Bind();
-
         std::vector<GLushort> indices = { 0, 1, 2 };
         ElementBuffer eBuffer;
         eBuffer.SetIndices(indices);
-        eBuffer.Bind();
+        eBuffer.Create();
+        
 
         while (window.open)
         {
             renderer.Clear(Color::CornflowerBlue);
 
             program.MakeActive();
+
+            vBuffer.Bind();
+            eBuffer.Bind();
+            
             eBuffer.Draw();
+
+            eBuffer.Unbind();
+            vBuffer.Unbind();
+            
             program.MakeInactive();
 
             renderer.SwapBuffers();
             window.PollWindowEvents();
         }
-
-        eBuffer.Unbind();
-        vBuffer.Bind();
     }
 
     return 0;
