@@ -25,10 +25,13 @@ SOFTWARE.
 #ifndef IVY_UNIFORMBUFFER_H
 #define IVY_UNIFORMBUFFER_H
 
-class UniformBuffer {
+#include "Symbols.h"
+#include "Renderer.h"
+
+class IVY_API UniformBuffer {
 public:
-    void Bind();
-    void Unbind();
+    void Bind(void);
+    void Unbind(void);
 };
 
 #endif // IVY_UNIFORMBUFFER_H

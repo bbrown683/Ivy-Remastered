@@ -3,15 +3,19 @@
 
 #include "Renderer.h"
 
-class ElementBuffer {
-private:
-    GLuint m_ElementBuffer;
-
+class IVY_API ElementBuffer {
 public:
-    void Bind(GLushort* indices);
-    void Unbind();
+    void Bind(void);
+    void Create(void);
+    void SetIndices(std::vector<GLushort> indices);
+    void Unbind(void);
 
-    void Draw();
+    void Draw(void);
+
+private:
+
+    GLuint m_ElementBuffer;
+    std::vector<GLushort> m_Indices;
 };
 
-#endif // IVY_INDEX_BUFFER
+#endif // IVY_INDEXBUFFER_H

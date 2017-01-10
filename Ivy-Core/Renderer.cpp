@@ -25,7 +25,7 @@ SOFTWARE.
 #include "Renderer.h"
 
 Renderer::Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alphaBits, EGLint depthBits, EGLint stencilBits,
-    EGLint swapInterval, bool enableMultisampling, bool enableVysnc, bool enableDebug) {
+    EGLint swapInterval, bool enableMultisampling, bool enableDebug) {
     this->m_RedBits = redBits;
     this->m_GreenBits = greenBits;
     this->m_BlueBits = blueBits;
@@ -34,7 +34,6 @@ Renderer::Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alp
     this->m_StencilBits = stencilBits;
     this->m_SwapInterval = swapInterval;
     this->m_MultisamplingEnabled = enableMultisampling;
-    this->m_VsyncEnabled = enableVysnc;
     this->m_DebugEnabled = enableDebug;
 }
 
@@ -106,16 +105,6 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
         return false;
     }
 
-#ifdef USE_GL_ES_3_0
-    const char* displayExtensions = eglQueryString(m_Display, EGL_EXTENSIONS);
-    // EGL_KHR_create_context is required to request a non-ES2 context.
-    bool KHRCreateContext = strstr(displayExtensions, "EGL_KHR_create_context") != nullptr;
-    if (majorVersion != 2 && minorVersion != 0 && !KHRCreateContext) {
-        Destroy();
-        return false;
-    }
-#endif
-
     // Bind OpenGL ES API for ANGLE use.
     eglBindAPI(EGL_OPENGL_ES_API);
     if (eglGetError() != EGL_SUCCESS) {
@@ -160,17 +149,10 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
 
     // Set the GLES context attributes.
     std::vector<EGLint> contextAttributes;
-#ifdef USE_GL_ES_3_0
-    contextAttributes.push_back(EGL_CONTEXT_MAJOR_VERSION_KHR);
-    contextAttributes.push_back(3);
-    contextAttributes.push_back(EGL_CONTEXT_MINOR_VERSION_KHR);
-    contextAttributes.push_back(0);
-#else
     contextAttributes.push_back(EGL_CONTEXT_MAJOR_VERSION);
     contextAttributes.push_back(2);
     contextAttributes.push_back(EGL_CONTEXT_MINOR_VERSION);
     contextAttributes.push_back(0);
-#endif
     contextAttributes.push_back(EGL_CONTEXT_OPENGL_DEBUG);
     contextAttributes.push_back(m_DebugEnabled ? EGL_TRUE : EGL_FALSE);
     contextAttributes.push_back(EGL_NONE);
@@ -198,13 +180,10 @@ bool Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) 
     std::cout << "[Renderer Information]" << std::endl;
     std::cout << glGetString(GL_VERSION) << std::endl;
     std::cout << glGetString(GL_RENDERER) << std::endl;
-    std::cout << "Red Bits: " << m_RedBits << std::endl;
-    std::cout << "Green Bits: " << m_GreenBits << std::endl;
-    std::cout << "Blue Bits: " << m_BlueBits << std::endl;
-    std::cout << "Alpha Bits: " << m_AlphaBits << std::endl;
-    std::cout << "Depth Bits: " << m_DepthBits << std::endl;
-    std::cout << "Stencil Bits: " << m_StencilBits << std::endl;
-
+    std::cout << "Bits per pixel: " << m_RedBits + m_GreenBits + m_BlueBits + m_AlphaBits << std::endl;
+    GLint viewportInfo[4];
+    glGetIntegerv(GL_VIEWPORT, viewportInfo);
+    std::cout << "Resolution: " << viewportInfo[2] << "x" << viewportInfo[3] << std::endl;
     return true;
 }
 

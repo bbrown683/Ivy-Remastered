@@ -2,7 +2,6 @@
 #define IVY_WINDOW_H
 
 #include <Windows.h>
-
 #include <string>
 #include <queue>
 

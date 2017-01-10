@@ -23,3 +23,7 @@ SOFTWARE.
 */
 
 #include "UniformBuffer.h"
+
+void UniformBuffer::Bind(void) {
+
+}

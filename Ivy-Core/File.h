@@ -1,3 +1,6 @@
+#ifndef IVY_FILE_H
+#define IVY_FILE_H
+
 #include <iostream>
 #include <vector>
 
@@ -9,3 +12,5 @@ private:
 
     FILE* m_pFile;
 };
+
+#endif // IVY_FILE_H

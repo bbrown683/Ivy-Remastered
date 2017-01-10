@@ -2,15 +2,15 @@
 #define IVY_PROGRAM_H
 
 #include <string>
-#include <vector>
 
-#include "Symbols.h"
-#include "Shader.h"
+#include "File.h"
+#include "Renderer.h"
 
 class IVY_API Program {
 public:
-    Program(std::vector<Shader> shaders) {
-        this->m_Shaders = shaders;
+    Program(std::string vertexShaderPath, std::string fragmentShaderPath) {
+        this->m_VertexShaderPath = vertexShaderPath;
+        this->m_FragmentShaderPath = fragmentShaderPath;
     }
     ~Program();
 
@@ -20,12 +20,31 @@ public:
     void MakeInactive(void);
 
     GLuint GetProgramID(void) { return m_ProgramID; }
-    std::vector<Shader> GetAttachedShaders(void) { return m_Shaders; };
+    
+    GLuint GetVertexShaderID(void) { return m_VertexShaderID; }
+    std::string GetVertexShaderPath(void) { return m_VertexShaderPath; }
+    std::string GetVertexShaderSource(void) { return m_VertexShaderSource; }
+    
+    GLuint GetFragmentShaderID(void) { return m_FragmentShaderID; }
+    std::string GetFragmentShaderPath(void) { return m_FragmentShaderPath; }
+    std::string GetFragmentShaderSource(void) { return m_FragmentShaderSource; }
 
+    
 private:
     
+    bool SetShaderSource(GLuint shaderID, std::string shaderPath, std::string* shaderSource);
+    bool ValidateShader(GLuint shaderID);
+    bool ValidateProgramStage(GLuint programID, GLenum stage);
+    
     GLuint m_ProgramID;
-    std::vector<Shader> m_Shaders;
+
+    GLuint m_VertexShaderID;
+    std::string m_VertexShaderPath;
+    std::string m_VertexShaderSource;
+    
+    GLuint m_FragmentShaderID;
+    std::string m_FragmentShaderPath;
+    std::string m_FragmentShaderSource;
 
     bool m_Disposed;
 };

@@ -1,5 +1,5 @@
-varying mediump vec4 fragColor;
+varying lowp vec4 frag_Color;
 
 void main() {
-    gl_FragColor = fragColor;
+    gl_FragColor = frag_Color;
 }

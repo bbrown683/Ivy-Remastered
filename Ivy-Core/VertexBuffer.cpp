@@ -24,19 +24,51 @@ SOFTWARE.
 
 #include "VertexBuffer.h"
 
-void VertexBuffer::Bind(GLfloat* vertices, GLfloat* colors) {    
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vertices);
-    glEnableVertexAttribArray(0);
+void VertexBuffer::Bind() {
+    // See Program.cpp for the vertex shader attribute binding's
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Position)));
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Color0)));
+    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Color1)));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Normal)));
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Tangent)));
+    glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_Bitangent)));
+    glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_BlendWeight)));
+    glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_BlendIndices)));
+    glVertexAttribPointer(8, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord0)));
+    glVertexAttribPointer(9, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord1)));
+    glVertexAttribPointer(10, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord2)));
+    glVertexAttribPointer(11, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord3)));
+    glVertexAttribPointer(12, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord4)));
+    glVertexAttribPointer(13, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord5)));
+    glVertexAttribPointer(14, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord6)));
+    glVertexAttribPointer(15, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<GLvoid*>(offsetof(Vertex, m_TexCoord7)));
 
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, colors);
-    glEnableVertexAttribArray(1);
+    for (GLuint i = 0; i < 16; i++)
+        glEnableVertexAttribArray(i);
+}
+
+void VertexBuffer::Create() {
+    glGenVertexArraysOES(1, &m_VertexArray);
+    glBindVertexArrayOES(m_VertexArray);
+
+    glGenBuffers(1, &m_VertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, m_Vertices.size() * sizeof(Vertex), m_Vertices.data(), GL_STATIC_DRAW);
+}
+
+void VertexBuffer::SetVertices(std::vector<Vertex> vertices) {
+    this->m_Vertices = vertices;
 }
 
 void VertexBuffer::Unbind() {
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
+    for (GLuint i = 0; i < 16; i++)
+        glDisableVertexAttribArray(i);
+
+    glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+    glDeleteBuffers(1, &m_VertexBuffer);
+    glDeleteVertexArraysOES(1, &m_VertexArray);
 }
 
 void VertexBuffer::Draw() {
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, m_Vertices.size());
 }

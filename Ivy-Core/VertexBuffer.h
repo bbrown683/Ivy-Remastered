@@ -25,22 +25,22 @@ SOFTWARE.
 #ifndef IVY_VERTEXBUFFER_H
 #define IVY_VERTEXBUFFER_H
 
-#include <tuple>
-
 #include "Renderer.h"
-#include "Program.h"
+#include "Vertex.h"
 
-class VertexBuffer {
+class IVY_API VertexBuffer {
 public:
-    VertexBuffer(Program& program) : program(program) {}
+    void Bind(void);
+    void Create(void);
+    void SetVertices(std::vector<Vertex> vertices);
+    void Unbind(void);
 
-    void Bind(GLfloat* vertices, GLfloat* colors);
-    void Unbind();
-
-    void Draw();
+    void Draw(void);
 
 private:
-    Program& program;
+    GLuint m_VertexArray;
+    GLuint m_VertexBuffer;
+    std::vector<Vertex> m_Vertices;
 };
 
 #endif // IVY_VERTEXBUFFER_H

@@ -45,7 +45,7 @@ SOFTWARE.
 class IVY_API Renderer {
 public:
     Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alphaBits, EGLint depthBits, EGLint stencilBits, 
-        EGLint swapIntervalbool, bool enableMultisampling, bool enableVysnc, bool enableDebug);
+        EGLint swapIntervalbool, bool enableMultisampling, bool enableDebug);
     ~Renderer();
 
     void AdjustViewport(unsigned int width, unsigned int height);
@@ -55,10 +55,10 @@ public:
     bool IsInitialized(void);
     void SwapBuffers(void);
 
-    EGLint GetRenderer(void) { return m_Renderer; };
-    EGLint GetRendererType(void) { return m_RendererType; };
-    EGLint GetVersionMajor(void) { return m_RendererVersionMajor; };
-    EGLint GetVersionMinor(void) { return m_RendererVersionMinor; };
+    EGLint GetRenderer(void) { return m_Renderer; }
+    EGLint GetRendererType(void) { return m_RendererType; }
+    EGLint GetVersionMajor(void) { return m_RendererVersionMajor; }
+    EGLint GetVersionMinor(void) { return m_RendererVersionMinor; }
 
     EGLint GetRedBits(void) { return m_RedBits; }
     void SetRedBits(EGLint bits) { m_RedBits = bits; }
@@ -74,13 +74,11 @@ public:
     void SetStencilBits(EGLint bits) { m_StencilBits = bits; }
     EGLint GetSwapInverval(void) { return m_SwapInterval; }
     void SetSwapInterval(EGLint interval);
-    bool GetVysncState(void) { return m_VsyncEnabled; }
-    void SetVysncState(bool state) { m_VsyncEnabled = state; }
     
-    EGLConfig GetEGLConfig(void) { return m_Config; };
-    EGLDisplay GetEGLDisplay(void) { return m_Display; };
-    EGLSurface GetEGLSurface(void) { return m_Surface; };
-    EGLContext GetEGLContext(void) { return m_Context; };
+    EGLConfig GetEGLConfig(void) { return m_Config; }
+    EGLDisplay GetEGLDisplay(void) { return m_Display; }
+    EGLSurface GetEGLSurface(void) { return m_Surface; }
+    EGLContext GetEGLContext(void) { return m_Context; }
 
 private:
 
@@ -98,7 +96,6 @@ private:
     EGLint m_StencilBits;
     EGLint m_SwapInterval;
     bool m_MultisamplingEnabled;
-    bool m_VsyncEnabled;
     bool m_DebugEnabled;
 
     EGLConfig m_Config;
