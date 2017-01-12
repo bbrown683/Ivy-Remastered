@@ -27,15 +27,24 @@ SOFTWARE.
 
 #include <glm/vec4.hpp>
 #include <glm/matrix.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "Program.h"
+#include "VertexBuffer.h"
+#include "ElementBuffer.h"
+#include "UniformBuffer.h"
 
 namespace Ivy {
     namespace Graphics {
         class IVY_API Mesh {
         public:
-            Mesh(Program& program) : m_Program(program) {}
+            Mesh(Program& program, std::vector<Vertex> vertices, std::vector<GLushort> indices) : 
+                m_Program(program), m_UniformBuffer(m_Program) {
+                m_Vertices = vertices;
+                m_Indices = indices;
+            }
 
+            void Create(void);
             void Draw(void);
 
             void SetPosition(glm::vec3 position);
@@ -43,11 +52,18 @@ namespace Ivy {
             void SetScale(glm::vec3 scale);
 
         private:
-            Program m_Program;
+            Program& m_Program;
 
-            glm::mat4 m_Position;
+            std::vector<Vertex> m_Vertices;
+            std::vector<GLushort> m_Indices;
+
+            glm::mat4 m_Translation;
             glm::mat4 m_Rotation;
             glm::mat4 m_Scale;
+
+            VertexBuffer m_VertexBuffer;
+            ElementBuffer m_ElementBuffer;
+            UniformBuffer m_UniformBuffer;
         };
     }
 }

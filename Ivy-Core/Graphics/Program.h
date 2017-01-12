@@ -71,8 +71,6 @@ namespace Ivy {
             GLuint m_FragmentShaderID;
             std::string m_FragmentShaderPath;
             std::string m_FragmentShaderSource;
-
-            bool m_Disposed;
         };
     }
 }

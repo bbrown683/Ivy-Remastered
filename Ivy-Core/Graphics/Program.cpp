@@ -25,8 +25,7 @@ SOFTWARE.
 #include "Program.h"
 
 Ivy::Graphics::Program::~Program() {
-    if(!m_Disposed)
-        Program::Destroy();
+    Program::Destroy();
 }
 
 bool Ivy::Graphics::Program::Create(void) {
@@ -114,7 +113,6 @@ void Ivy::Graphics::Program::Destroy(void) {
     glDeleteShader(m_VertexShaderID);
     glDeleteShader(m_FragmentShaderID);
     glDeleteProgram(m_ProgramID);
-    m_Disposed = true;
 }
 
 void Ivy::Graphics::Program::MakeActive(void) {
@@ -122,7 +120,7 @@ void Ivy::Graphics::Program::MakeActive(void) {
 }
 
 void Ivy::Graphics::Program::MakeInactive(void) {
-    glUseProgram(0);
+    glUseProgram(GL_NONE);
 }
 
 bool Ivy::Graphics::Program::SetShaderSource(GLuint shaderID, std::string shaderPath, std::string* shaderSource) {

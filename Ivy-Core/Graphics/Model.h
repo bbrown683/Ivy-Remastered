@@ -41,16 +41,16 @@ namespace Ivy {
             bool Load(std::string filePath);
             void Draw(void);
 
-            glm::vec3 GetPosition(void);
-            glm::vec3 GetRotation(void);
-            glm::vec3 GetScale(void);
+            glm::vec3 GetPosition(void) { return m_Position; }
+            glm::vec3 GetRotation(void) { return m_Rotation; }
+            glm::vec3 GetScale(void) { return m_Scale; }
 
             void SetPosition(glm::vec3 position);
             void SetRotation(glm::vec3 rotation);
             void SetScale(glm::vec3 scale);
 
         private:
-            Program m_Program;
+            Program& m_Program;
             std::string m_FilePath;
             std::vector<Mesh> m_Meshes;
 

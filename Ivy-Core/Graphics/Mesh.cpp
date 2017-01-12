@@ -23,3 +23,40 @@ SOFTWARE.
 */
 
 #include "Mesh.h"
+
+void Ivy::Graphics::Mesh::Create(void) {
+    m_VertexBuffer.SetVertices(m_Vertices);
+    m_ElementBuffer.SetIndices(m_Indices);
+
+    m_VertexBuffer.Create();
+    m_ElementBuffer.Create();
+
+    m_UniformBuffer.GetModelLocation();
+}
+
+void Ivy::Graphics::Mesh::Draw(void) {
+    m_Program.MakeActive();
+    
+    m_VertexBuffer.Bind();
+    m_ElementBuffer.Bind();
+    m_UniformBuffer.SetModelMatrix(m_Translation * m_Rotation * m_Scale);
+
+    m_ElementBuffer.Draw();
+
+    m_VertexBuffer.Unbind();
+    m_ElementBuffer.Unbind();
+
+    m_Program.MakeInactive();
+}
+
+void Ivy::Graphics::Mesh::SetPosition(glm::vec3 position) {
+    m_Translation = glm::translate(m_Translation, position);
+}
+
+void Ivy::Graphics::Mesh::SetRotation(glm::vec3 rotation) {
+    m_Rotation = glm::rotate(m_Rotation, 0.0f, rotation);
+}
+
+void Ivy::Graphics::Mesh::SetScale(glm::vec3 scale) {
+    m_Scale = glm::scale(m_Scale, scale);
+}

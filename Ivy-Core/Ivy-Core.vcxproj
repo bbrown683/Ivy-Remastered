@@ -84,8 +84,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -93,7 +93,10 @@
     <PostBuildEvent>
       <Command>xcopy /f /s /y "$(SolutionDir)Dependencies\ANGLE\bin" "$(OutputPath)"
 xcopy /f /s /y "$(ProjectDir)vert.txt" "$(OutputPath)"
-xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"</Command>
+xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)cube.ply" "$(OutputPath)"
+if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -111,6 +114,13 @@ xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"</Command>
     <Link>
       <AdditionalDependencies>libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /f /s /y "$(SolutionDir)Dependencies\ANGLE\bin" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)vert.txt" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"
+if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -154,6 +164,7 @@ xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="Graphics\ElementBuffer.h" />
     <ClInclude Include="Graphics\Mesh.h" />
@@ -169,6 +180,7 @@ xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="IO\File.cpp" />
     <ClCompile Include="Graphics\ElementBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
@@ -184,6 +196,9 @@ xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"</Command>
   <ItemGroup>
     <Text Include="frag.txt" />
     <Text Include="vert.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cube.ply" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

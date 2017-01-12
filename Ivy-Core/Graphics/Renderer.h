@@ -47,7 +47,7 @@ namespace Ivy {
         class IVY_API Renderer {
         public:
             Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alphaBits, EGLint depthBits, EGLint stencilBits,
-                EGLint swapIntervalbool, bool enableMultisampling, bool enableDebug);
+                EGLint swapIntervalbool, bool enableMultisampling, bool enableDebug, bool disableErrors);
             ~Renderer();
 
             void AdjustViewport(unsigned int width, unsigned int height);
@@ -99,6 +99,7 @@ namespace Ivy {
             EGLint m_SwapInterval;
             bool m_MultisamplingEnabled;
             bool m_DebugEnabled;
+            bool m_DisableErrors;
 
             EGLConfig m_Config;
             EGLDisplay m_Display;

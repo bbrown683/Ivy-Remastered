@@ -14,6 +14,7 @@
     <ClInclude Include="Graphics\ElementBuffer.h" />
     <ClInclude Include="Graphics\UniformBuffer.h" />
     <ClInclude Include="IO\File.h" />
+    <ClInclude Include="Graphics\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />
@@ -28,9 +29,13 @@
     <ClCompile Include="Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Graphics\Texture.cpp" />
     <ClCompile Include="IO\File.cpp" />
+    <ClCompile Include="Graphics\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />
     <Text Include="frag.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cube.ply" />
   </ItemGroup>
 </Project>

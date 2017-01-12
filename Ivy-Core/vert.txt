@@ -9,5 +9,6 @@ varying lowp vec4 frag_Color;
 
 void main() {
     frag_Color = ivy_Color0;
-    gl_Position = vec4(ivy_Position, 1.0);
+    //gl_Position = vec4(ivy_Position, 1.0);
+    gl_Position = ivy_Projection * ivy_View * ivy_Model * vec4(ivy_Position, 1.0);
 }

@@ -25,7 +25,7 @@ SOFTWARE.
 #include "Renderer.h"
 
 Ivy::Graphics::Renderer::Renderer(EGLint redBits, EGLint greenBits, EGLint blueBits, EGLint alphaBits, EGLint depthBits, EGLint stencilBits,
-    EGLint swapInterval, bool enableMultisampling, bool enableDebug) {
+    EGLint swapInterval, bool enableMultisampling, bool enableDebug, bool disableErrors) {
     this->m_RedBits = redBits;
     this->m_GreenBits = greenBits;
     this->m_BlueBits = blueBits;
@@ -35,6 +35,7 @@ Ivy::Graphics::Renderer::Renderer(EGLint redBits, EGLint greenBits, EGLint blueB
     this->m_SwapInterval = swapInterval;
     this->m_MultisamplingEnabled = enableMultisampling;
     this->m_DebugEnabled = enableDebug;
+    this->m_DisableErrors = disableErrors;
 }
 
 Ivy::Graphics::Renderer::~Renderer(void) {
@@ -155,6 +156,10 @@ bool Ivy::Graphics::Renderer::Create(EGLNativeWindowType window, EGLNativeDispla
     contextAttributes.push_back(0);
     contextAttributes.push_back(EGL_CONTEXT_OPENGL_DEBUG);
     contextAttributes.push_back(m_DebugEnabled ? EGL_TRUE : EGL_FALSE);
+    contextAttributes.push_back(EGL_CONTEXT_OPENGL_NO_ERROR_KHR);
+    contextAttributes.push_back(m_DisableErrors ? EGL_TRUE : EGL_FALSE);
+    contextAttributes.push_back(EGL_CONTEXT_WEBGL_COMPATIBILITY_ANGLE);
+    contextAttributes.push_back(EGL_TRUE);
     contextAttributes.push_back(EGL_NONE);
 
     // Create the context with the display, configuration and specified context attributes. 
@@ -171,6 +176,7 @@ bool Ivy::Graphics::Renderer::Create(EGLNativeWindowType window, EGLNativeDispla
         return false;
     }
 
+    // Allows for the creation of vertex array objects in OpenGL ES 2.0.
     const unsigned char* glExtensions = glGetString(GL_EXTENSIONS);
     if (!strstr(reinterpret_cast<const char*>(glExtensions), "GL_OES_vertex_array_object")) {
         Destroy();

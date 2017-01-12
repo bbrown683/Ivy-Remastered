@@ -25,14 +25,39 @@ SOFTWARE.
 #ifndef IVY_UNIFORMBUFFER_H
 #define IVY_UNIFORMBUFFER_H
 
-#include "Renderer.h"
+#include <glm/matrix.hpp>
+
+#include "Program.h"
 
 namespace Ivy {
     namespace Graphics {
         class IVY_API UniformBuffer {
         public:
-            void Bind(void);
-            void Unbind(void);
+            UniformBuffer(Program& program) : m_Program(program) {}
+        
+            void GetModelLocation(void);
+            void GetViewLocation(void);
+            void GetProjectionLocation(void);
+
+            glm::mat4 GetModelMatrix(void);
+            glm::mat4 GetViewMatrix(void);
+            glm::mat4 GetProjectionMatrix(void);
+
+            void SetModelMatrix(glm::mat4 matrix);
+            void SetViewMatrix(glm::mat4 matrix);
+            void SetProjectionMatrix(glm::mat4 matrix);
+
+        private:
+
+            Program& m_Program;
+
+            GLint m_ModelLocation;
+            GLint m_ViewLocation;
+            GLint m_ProjectionLocation;
+
+            glm::mat4 m_ModelMatrix;
+            glm::mat4 m_ViewMatrix;
+            glm::mat4 m_ProjectionMatrix;
         };
     }
 }

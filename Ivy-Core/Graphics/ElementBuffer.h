@@ -40,7 +40,6 @@ namespace Ivy {
             void Draw(void);
 
         private:
-
             GLuint m_ElementBuffer;
             std::vector<GLushort> m_Indices;
         };
