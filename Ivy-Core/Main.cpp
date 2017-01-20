@@ -16,7 +16,7 @@ int main(int argc, char** argv)
         Program program("vert.txt", "frag.txt");
         program.Create();
 
-        Camera camera(&program, glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f, 0.0f, 0.0f), 
+        Camera camera(&program, glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(0.0f, 0.0f, 0.0f), 
             glm::radians(45.0f), 1080, 720);
         camera.Create();
 

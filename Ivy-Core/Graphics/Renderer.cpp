@@ -183,6 +183,8 @@ bool Ivy::Graphics::Renderer::Create(EGLNativeWindowType window, EGLNativeDispla
         return false;
     }
 
+    glEnable(GL_DEPTH_TEST);
+
     std::cout << "[Renderer Information]" << std::endl;
     std::cout << glGetString(GL_VERSION) << std::endl;
     std::cout << glGetString(GL_RENDERER) << std::endl;
