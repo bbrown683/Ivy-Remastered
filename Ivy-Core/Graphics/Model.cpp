@@ -15,41 +15,41 @@ bool Ivy::Graphics::Model::Load(std::string filePath) {
     }
 
     for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
-        aiMesh* aMesh = scene->mMeshes[i];
+        aiMesh* mesh = scene->mMeshes[i];
 
         // Components of a mesh.
         std::vector<Vertex> vertices;
         std::vector<GLushort> indices;
+        std::vector<Texture> textures;
 
         // Grab the vertex position and colors for the mesh.
-        for (unsigned int j = 0; j < aMesh->mNumVertices; j++) {
+        for (unsigned int j = 0; j < mesh->mNumVertices; j++) {
             Vertex vertex;
 
-            if (aMesh->HasPositions()) {
-                aiVector3D position = aMesh->mVertices[j];
+            if (mesh->HasPositions()) {
+                aiVector3D position = mesh->mVertices[j];
                 vertex.m_Position = glm::vec3(position.x, position.y, position.z);
             }
             else
                 vertex.m_Position = glm::vec3();
 
-            if (aMesh->HasTextureCoords(0)) {
-                aiVector3D texCoord0 = aMesh->mTextureCoords[0][j];
+            if (mesh->HasTextureCoords(0)) {
+                aiVector3D texCoord0 = mesh->mTextureCoords[i][j];
                 vertex.m_TexCoord0 = glm::vec2(texCoord0.x, texCoord0.y);
             }
             else
                 vertex.m_TexCoord0 = glm::vec2();
 
-            if (aMesh->HasNormals())
-            {
-                aiVector3D normal = aMesh->mNormals[j];
+            if (mesh->HasNormals()) {
+                aiVector3D normal = mesh->mNormals[j];
                 vertex.m_Normal = glm::vec3(normal.x, normal.y, normal.z);
             }
             else
                 vertex.m_Normal = glm::vec3();
 
-            if (aMesh->HasVertexColors(0))
-            {
-                aiColor4D color0 = aMesh->mColors[0][j];
+
+            if (mesh->HasVertexColors(0)) {
+                aiColor4D color0 = mesh->mColors[0][j];
                 vertex.m_Color0 = glm::vec4(color0.r, color0.g, color0.b, color0.a);
             }
             else
@@ -58,19 +58,29 @@ bool Ivy::Graphics::Model::Load(std::string filePath) {
             vertices.push_back(vertex);
         }
 
-        if (aMesh->HasFaces())
-        {
+        if (mesh->HasFaces()) {
             // Grab the indices for the mesh.
-            for (unsigned int j = 0; j < aMesh->mNumFaces; j++)
-            {
-                aiFace face = aMesh->mFaces[j];
+            for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
+                aiFace face = mesh->mFaces[j];
 
                 for (unsigned int k = 0; k < face.mNumIndices; k++)
                     indices.push_back(face.mIndices[k]);
             }
         }
 
-        m_Meshes.push_back(Mesh(m_Program, vertices, indices));
+        // Check to see if mesh has a texture.
+        if (mesh->mMaterialIndex >= 0) {
+            aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+
+            // Iterate though each texture type if they exist.
+            for (unsigned int j = 0; j < material->GetTextureCount(aiTextureType_DIFFUSE); j++) {
+                // Get the texture for the material.
+                aiString string;
+                material->GetTexture(aiTextureType_DIFFUSE, j, &string);
+                textures.push_back(Texture(string.C_Str(), GL_RGBA));
+            }     
+        } 
+        m_Meshes.push_back(TestMesh(m_Program, vertices, indices, textures));
     }
 
     // Create our meshes.

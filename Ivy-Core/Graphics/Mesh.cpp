@@ -35,7 +35,7 @@ void Ivy::Graphics::Mesh::Create(void) {
 }
 
 void Ivy::Graphics::Mesh::Draw(void) {
-    m_Program.MakeActive();
+    m_Program->MakeActive();
     
     m_VertexBuffer.Bind();
     m_ElementBuffer.Bind();
@@ -46,7 +46,7 @@ void Ivy::Graphics::Mesh::Draw(void) {
     m_VertexBuffer.Unbind();
     m_ElementBuffer.Unbind();
 
-    m_Program.MakeInactive();
+    m_Program->MakeInactive();
 }
 
 void Ivy::Graphics::Mesh::SetPosition(glm::vec3 position) {
@@ -54,7 +54,7 @@ void Ivy::Graphics::Mesh::SetPosition(glm::vec3 position) {
 }
 
 void Ivy::Graphics::Mesh::SetRotation(glm::vec3 rotation) {
-    m_Rotation = glm::rotate(m_Rotation, 0.0f, rotation);
+    m_Rotation = glm::rotate(m_Rotation, 0.001f , rotation);
 }
 
 void Ivy::Graphics::Mesh::SetScale(glm::vec3 scale) {

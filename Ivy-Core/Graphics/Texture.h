@@ -25,12 +25,34 @@ SOFTWARE.
 #ifndef IVY_TEXTURE_H
 #define IVY_TEXTURE_H
 
-#include "Renderer.h"
+#include "Program.h"
+#include <FreeImage/FreeImage.h>
 
 namespace Ivy {
     namespace Graphics {
         class IVY_API Texture {
+        public:
+            Texture(std::string filePath, GLenum textureType) {
+                m_FilePath = filePath;
+                m_TextureType = textureType;
+            }
 
+            bool CreateFromFile(Program* program);
+            void MakeActive();
+
+        private:
+
+            GLuint m_TextureID;
+            GLint m_SamplerLocation;
+
+            std::string m_FilePath;
+            GLenum m_TextureType;
+
+            GLuint m_Width;
+            GLuint m_Height;
+            GLuint m_Pitch;
+
+            GLubyte* m_Bitmap;
         };
     }
 }

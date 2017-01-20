@@ -32,7 +32,7 @@ void Ivy::Graphics::ElementBuffer::Create(void) {
     glGenBuffers(1, &m_ElementBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ElementBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Indices.size() *
-        sizeof(unsigned short), m_Indices.data(), GL_STATIC_DRAW);
+        sizeof(GLushort), reinterpret_cast<void**>(m_Indices.data()), GL_STATIC_DRAW);
 }
 
 void Ivy::Graphics::ElementBuffer::Destroy(void) {
@@ -48,5 +48,6 @@ void Ivy::Graphics::ElementBuffer::Unbind(void) {
 }
 
 void Ivy::Graphics::ElementBuffer::Draw(void) {
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_Indices.size()), GL_UNSIGNED_SHORT, nullptr);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_Indices.size()), 
+        GL_UNSIGNED_SHORT, nullptr);
 }

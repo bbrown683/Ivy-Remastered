@@ -26,6 +26,7 @@ SOFTWARE.
 #define IVY_UNIFORMBUFFER_H
 
 #include <glm/matrix.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "Program.h"
 
@@ -33,7 +34,7 @@ namespace Ivy {
     namespace Graphics {
         class IVY_API UniformBuffer {
         public:
-            UniformBuffer(Program& program) : m_Program(program) {}
+            UniformBuffer(Program* program) : m_Program(program) {}
         
             void GetModelLocation(void);
             void GetViewLocation(void);
@@ -49,7 +50,7 @@ namespace Ivy {
 
         private:
 
-            Program& m_Program;
+            Program* m_Program;
 
             GLint m_ModelLocation;
             GLint m_ViewLocation;

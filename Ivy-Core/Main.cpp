@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Model.h"
+#include "Graphics/Colors.h"
 
 using namespace Ivy::Graphics;
 
@@ -15,18 +16,20 @@ int main(int argc, char** argv)
         Program program("vert.txt", "frag.txt");
         program.Create();
 
-        Camera camera(program, glm::vec3(15.0f, 5.0f, -20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        Camera camera(&program, glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f, 0.0f, 0.0f), 
+            glm::radians(45.0f), 1080, 720);
         camera.Create();
 
-        Model model(program);
-        model.Load("cube.ply");
+        Model model(&program);
+        model.Load("monocube.dae");
 
         while (window.open)
         {
-            renderer.Clear(Color::CornflowerBlue);
-            
+            renderer.Clear(Colors::CornflowerBlue);
             model.Draw();
-            
+
+            model.SetRotation(glm::vec3(0.0f, 0.000005f, 0.0f));
+
             renderer.SwapBuffers();
             window.PollWindowEvents();
         }

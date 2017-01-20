@@ -33,6 +33,8 @@ SOFTWARE.
 #define GL_GLEXT_PROTOTYPES 1
 #endif 
 
+#include <glm/vec3.hpp>
+
 #include <export.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
@@ -40,7 +42,6 @@ SOFTWARE.
 #include <GLES2/gl2ext.h>
 
 #include "../Symbols.h"
-#include "../Color.h"
 
 namespace Ivy {
     namespace Graphics {
@@ -51,7 +52,7 @@ namespace Ivy {
             ~Renderer();
 
             void AdjustViewport(unsigned int width, unsigned int height);
-            void Clear(Color color);
+            void Clear(glm::vec3 color);
             bool Create(EGLNativeWindowType window, EGLNativeDisplayType display);
             void Destroy(void);
             bool IsInitialized(void);

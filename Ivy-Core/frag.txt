@@ -1,5 +1,8 @@
-varying lowp vec4 frag_Color;
+varying mediump vec4 frag_Color0;
+varying mediump vec2 frag_TexCoord0;
+
+uniform sampler2D ivy_Sampler0;
 
 void main() {
-    gl_FragColor = frag_Color;
+    gl_FragColor = texture2D(ivy_Sampler0, frag_TexCoord0);
 }

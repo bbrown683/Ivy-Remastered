@@ -155,10 +155,10 @@ bool Ivy::Graphics::Program::ValidateShader(GLuint shaderID) {
             std::vector<GLchar>infoLog(infoLogLength);
             glGetShaderInfoLog(shaderID, static_cast<GLsizei>(infoLog.size()), nullptr, &infoLog[0]);
 
-            std::cerr << "Shader Compilation Error: " << infoLog[0];
+            std::cerr << "Shader Compilation Error: " << &infoLog[0] << std::endl;
         }
         else
-            std::cerr << "Shader Compilation Error...";
+            std::cerr << "Shader Compilation Error...\n";
 
         Destroy();
         return false;
@@ -179,15 +179,15 @@ bool Ivy::Graphics::Program::ValidateProgramStage(GLuint programID, GLenum stage
             glGetProgramInfoLog(m_ProgramID, static_cast<GLsizei>(infoLog.size()), nullptr, &infoLog[0]);
 
             if(stage == GL_LINK_STATUS)
-                std::cerr << "ProgramID " << m_ProgramID << " failed to link with error: " << &infoLog[0];
+                std::cerr << "ProgramID " << m_ProgramID << " failed to link with error: " << &infoLog[0] << std::endl;
             else
-                std::cerr << "ProgramID " << m_ProgramID << " failed to validate with error: " << &infoLog[0];
+                std::cerr << "ProgramID " << m_ProgramID << " failed to validate with error: " << &infoLog[0] << std::endl;
         }
         else {
             if (stage == GL_LINK_STATUS)
-                std::cerr << "ProgramID " << m_ProgramID << " failed to link...";
+                std::cerr << "ProgramID " << m_ProgramID << " failed to link...\n";
             else
-                std::cerr << "ProgramID " << m_ProgramID << " failed to validate...";
+                std::cerr << "ProgramID " << m_ProgramID << " failed to validate...\n";
         }
 
         return false;

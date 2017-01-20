@@ -25,19 +25,19 @@ SOFTWARE.
 #include "UniformBuffer.h"
 
 void Ivy::Graphics::UniformBuffer::GetModelLocation(void) {
-    m_ModelLocation = glGetUniformLocation(m_Program.GetProgramID(), "ivy_Model");
+    m_ModelLocation = glGetUniformLocation(m_Program->GetProgramID(), "ivy_Model");
     if (glGetError() != GL_NO_ERROR)
         std::cerr << "Error getting model location" << std::endl;
 }
 
 void Ivy::Graphics::UniformBuffer::GetViewLocation(void) {
-    m_ViewLocation = glGetUniformLocation(m_Program.GetProgramID(), "ivy_View");
+    m_ViewLocation = glGetUniformLocation(m_Program->GetProgramID(), "ivy_View");
     if (glGetError() != GL_NO_ERROR)
         std::cerr << "Error getting view location" << std::endl;
 }
 
 void Ivy::Graphics::UniformBuffer::GetProjectionLocation(void) {
-    m_ProjectionLocation = glGetUniformLocation(m_Program.GetProgramID(), "ivy_Projection");
+    m_ProjectionLocation = glGetUniformLocation(m_Program->GetProgramID(), "ivy_Projection");
     if (glGetError() != GL_NO_ERROR)
         std::cerr << "Error getting projection location" << std::endl;
 }
@@ -56,21 +56,21 @@ glm::mat4 Ivy::Graphics::UniformBuffer::GetProjectionMatrix(void) {
 
 void Ivy::Graphics::UniformBuffer::SetModelMatrix(glm::mat4 matrix) {
     m_ModelMatrix = matrix;
-    glUniformMatrix4fv(m_ModelLocation, 1, GL_FALSE, &m_ModelMatrix[0][0]);
+    glUniformMatrix4fv(m_ModelLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix));
 }
 
 void Ivy::Graphics::UniformBuffer::SetViewMatrix(glm::mat4 matrix) {
     m_ViewMatrix = matrix;
 
-    m_Program.MakeActive();
-    glUniformMatrix4fv(m_ViewLocation, 1, GL_FALSE, &m_ViewMatrix[0][0]);
-    m_Program.MakeInactive();
+    m_Program->MakeActive();
+    glUniformMatrix4fv(m_ViewLocation, 1, GL_FALSE, glm::value_ptr(m_ViewMatrix));
+    m_Program->MakeInactive();
 }
 
 void Ivy::Graphics::UniformBuffer::SetProjectionMatrix(glm::mat4 matrix) {
     m_ProjectionMatrix = matrix;
     
-    m_Program.MakeActive();
-    glUniformMatrix4fv(m_ProjectionLocation, 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-    m_Program.MakeInactive();
+    m_Program->MakeActive();
+    glUniformMatrix4fv(m_ProjectionLocation, 1, GL_FALSE, glm::value_ptr(m_ProjectionMatrix));
+    m_Program->MakeInactive();
 }

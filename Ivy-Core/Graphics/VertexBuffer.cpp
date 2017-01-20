@@ -75,5 +75,5 @@ void Ivy::Graphics::VertexBuffer::Unbind(void) {
 }
 
 void Ivy::Graphics::VertexBuffer::Draw(void) {
-    glDrawArrays(GL_TRIANGLES, 0, m_Vertices.size());
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, m_Vertices.size());
 }

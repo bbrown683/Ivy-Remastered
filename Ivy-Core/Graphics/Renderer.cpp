@@ -47,10 +47,10 @@ void Ivy::Graphics::Renderer::AdjustViewport(unsigned int width, unsigned int he
     glViewport(0, 0, width, height);
 }
 
-void Ivy::Graphics::Renderer::Clear(Color color) {
+void Ivy::Graphics::Renderer::Clear(glm::vec3 color) {
     // Clear each buffer and set the back buffer to a specific color.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    glClearColor(color.GetRedChannel(), color.GetGreenChannel(), color.GetBlueChannel(), color.GetAlphaChannel());
+    glClearColor(color.r, color.g, color.b, 1.0f);
 }
 
 bool Ivy::Graphics::Renderer::Create(EGLNativeWindowType window, EGLNativeDisplayType display) {

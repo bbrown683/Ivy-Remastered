@@ -45,7 +45,7 @@ namespace Ivy {
             void MakeActive(void);
             void MakeInactive(void);
 
-            GLuint GetProgramID(void) { return m_ProgramID; }
+            GLuint GetProgramID(void) const { return m_ProgramID; }
 
             GLuint GetVertexShaderID(void) { return m_VertexShaderID; }
             std::string GetVertexShaderPath(void) { return m_VertexShaderPath; }

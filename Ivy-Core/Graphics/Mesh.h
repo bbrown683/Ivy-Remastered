@@ -33,12 +33,13 @@ SOFTWARE.
 #include "VertexBuffer.h"
 #include "ElementBuffer.h"
 #include "UniformBuffer.h"
+#include "Texture.h"
 
 namespace Ivy {
     namespace Graphics {
         class IVY_API Mesh {
         public:
-            Mesh(Program& program, std::vector<Vertex> vertices, std::vector<GLushort> indices) : 
+            Mesh(Program* program, std::vector<Vertex> vertices, std::vector<GLushort> indices) :
                 m_Program(program), m_UniformBuffer(m_Program) {
                 m_Vertices = vertices;
                 m_Indices = indices;
@@ -52,7 +53,7 @@ namespace Ivy {
             void SetScale(glm::vec3 scale);
 
         private:
-            Program& m_Program;
+            Program* m_Program;
 
             std::vector<Vertex> m_Vertices;
             std::vector<GLushort> m_Indices;

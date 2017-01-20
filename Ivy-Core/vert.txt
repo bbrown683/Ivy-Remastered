@@ -1,14 +1,17 @@
 attribute vec3 ivy_Position;
 attribute vec4 ivy_Color0;
+attribute vec3 ivy_Normal;
+attribute vec2 ivy_TexCoord0;
 
 uniform mat4 ivy_Model;
 uniform mat4 ivy_View;
 uniform mat4 ivy_Projection;
 
-varying lowp vec4 frag_Color;
+varying mediump vec4 frag_Color0;
+varying mediump vec2 frag_TexCoord0;
 
 void main() {
-    frag_Color = ivy_Color0;
-    //gl_Position = vec4(ivy_Position, 1.0);
+    frag_Color0 = ivy_Color0;
+    frag_TexCoord0 = ivy_TexCoord0;
     gl_Position = ivy_Projection * ivy_View * ivy_Model * vec4(ivy_Position, 1.0);
 }

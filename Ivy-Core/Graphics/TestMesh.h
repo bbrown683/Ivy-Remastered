@@ -20,31 +20,34 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+*/          
 
-#ifndef IVY_MODEL_H
-#define IVY_MODEL_H
+#ifndef IVY_TESTMESH_H
+#define IVY_TESTMESH_H
 
-#include <assimp/Importer.hpp>
-#include <assimp/postprocess.h>
-#include <assimp/scene.h>
 #include <glm/vec4.hpp>
+#include <glm/matrix.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-#include "Mesh.h"
-#include "TestMesh.h"
+#include "Program.h"
+#include "VertexBuffer.h"
+#include "ElementBuffer.h"
+#include "UniformBuffer.h"
+#include "Texture.h"
 
 namespace Ivy {
     namespace Graphics {
-        class IVY_API Model {
+        class IVY_API TestMesh {
         public:
-            Model(Program* program) : m_Program(program) {}
+            TestMesh(Program* program, std::vector<Vertex> vertices, std::vector<GLushort> indices, std::vector<Texture> textures) :
+                m_Program(program), m_UniformBuffer(m_Program) {
+                m_Vertices = vertices;
+                m_Indices = indices;
+                m_Textures = textures;
+            }
 
-            bool Load(std::string filePath);
+            void Create(void);
             void Draw(void);
-
-            glm::vec3 GetPosition(void) { return m_Position; }
-            glm::vec3 GetRotation(void) { return m_Rotation; }
-            glm::vec3 GetScale(void) { return m_Scale; }
 
             void SetPosition(glm::vec3 position);
             void SetRotation(glm::vec3 rotation);
@@ -52,14 +55,20 @@ namespace Ivy {
 
         private:
             Program* m_Program;
-            std::string m_FilePath;
-            std::vector<TestMesh> m_Meshes;
 
-            glm::vec3 m_Position;
-            glm::vec3 m_Rotation;
-            glm::vec3 m_Scale;
+            std::vector<Vertex> m_Vertices;
+            std::vector<GLushort> m_Indices;
+            std::vector<Texture> m_Textures;
+
+            glm::mat4 m_Translation;
+            glm::mat4 m_Rotation;
+            glm::mat4 m_Scale;
+
+            VertexBuffer m_VertexBuffer;
+            ElementBuffer m_ElementBuffer;
+            UniformBuffer m_UniformBuffer;
         };
     }
 }
 
-#endif // IVY_MODEL_H
+#endif // IVY_TESTMESH_H

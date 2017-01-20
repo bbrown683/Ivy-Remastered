@@ -22,44 +22,47 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef IVY_MODEL_H
-#define IVY_MODEL_H
-
-#include <assimp/Importer.hpp>
-#include <assimp/postprocess.h>
-#include <assimp/scene.h>
-#include <glm/vec4.hpp>
-
-#include "Mesh.h"
 #include "TestMesh.h"
 
-namespace Ivy {
-    namespace Graphics {
-        class IVY_API Model {
-        public:
-            Model(Program* program) : m_Program(program) {}
+void Ivy::Graphics::TestMesh::Create(void) {
+    m_VertexBuffer.SetVertices(m_Vertices);
+    m_ElementBuffer.SetIndices(m_Indices);
 
-            bool Load(std::string filePath);
-            void Draw(void);
+    m_VertexBuffer.Create();
+    m_ElementBuffer.Create();
 
-            glm::vec3 GetPosition(void) { return m_Position; }
-            glm::vec3 GetRotation(void) { return m_Rotation; }
-            glm::vec3 GetScale(void) { return m_Scale; }
+    m_UniformBuffer.GetModelLocation();
 
-            void SetPosition(glm::vec3 position);
-            void SetRotation(glm::vec3 rotation);
-            void SetScale(glm::vec3 scale);
-
-        private:
-            Program* m_Program;
-            std::string m_FilePath;
-            std::vector<TestMesh> m_Meshes;
-
-            glm::vec3 m_Position;
-            glm::vec3 m_Rotation;
-            glm::vec3 m_Scale;
-        };
-    }
+    if (m_Textures.size() > 0)
+        m_Textures[0].CreateFromFile(m_Program);
 }
 
-#endif // IVY_MODEL_H
+void Ivy::Graphics::TestMesh::Draw(void) {
+    m_Program->MakeActive();
+
+    m_VertexBuffer.Bind();
+    m_ElementBuffer.Bind();
+    m_UniformBuffer.SetModelMatrix(m_Translation * m_Rotation * m_Scale);
+
+    if (m_Textures.size() > 0)
+        m_Textures[0].MakeActive();
+
+    m_ElementBuffer.Draw();
+
+    m_VertexBuffer.Unbind();
+    m_ElementBuffer.Unbind();
+
+    m_Program->MakeInactive();
+}
+
+void Ivy::Graphics::TestMesh::SetPosition(glm::vec3 position) {
+    m_Translation = glm::translate(m_Translation, position);
+}
+
+void Ivy::Graphics::TestMesh::SetRotation(glm::vec3 rotation) {
+    m_Rotation = glm::rotate(m_Rotation, 0.025f, rotation);
+}
+
+void Ivy::Graphics::TestMesh::SetScale(glm::vec3 scale) {
+    m_Scale = glm::scale(m_Scale, scale);
+}
