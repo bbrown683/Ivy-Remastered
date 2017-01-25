@@ -23,10 +23,26 @@ int main(int argc, char** argv)
         Model model(&program);
         model.Load("monocube.dae");
 
+        Model model2(&program);
+        model2.Load("monocube.dae");
+        model2.SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+
+        Model model3(&program);
+        model3.Load("monocube.dae");
+        model3.SetPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+
+        Model model4(&program);
+        model4.Load("monocube.dae");
+        model4.SetPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
+
         while (window.open)
         {
             renderer.Clear(Colors::CornflowerBlue);
+            
             model.Draw();
+            model2.Draw();
+            model3.Draw();
+            model4.Draw();
 
             model.SetRotation(glm::vec3(0.0f, 0.000005f, 0.0f));
 
