@@ -166,6 +166,10 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
   <ItemGroup>
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Graphics\Colors.h" />
+    <ClInclude Include="Graphics\ExternalTexture.h" />
+    <ClInclude Include="Graphics\IMovable.h" />
+    <ClInclude Include="Graphics\ITexture.h" />
+    <ClInclude Include="Graphics\MemoryMappedTexture.h" />
     <ClInclude Include="Graphics\ModelMatrix.h" />
     <ClInclude Include="Graphics\ProjectionMatrix.h" />
     <ClInclude Include="Graphics\TestMesh.h" />

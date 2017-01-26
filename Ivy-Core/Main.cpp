@@ -12,6 +12,7 @@ int main(int argc, char** argv)
     {
         Renderer renderer(8, 8, 8, 8, 24, 8, 0, false, true, false);
         renderer.Create(window.GetPlatformWindow(), window.GetPlatformDisplay());
+        renderer.SetCullMode(GL_BACK);
 
         Program program("vert.txt", "frag.txt");
         program.Create();

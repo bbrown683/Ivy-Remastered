@@ -183,7 +183,9 @@ bool Ivy::Graphics::Renderer::Create(EGLNativeWindowType window, EGLNativeDispla
         return false;
     }
 
+    // Enable depth and stencil testing.
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
 
     std::cout << "[Renderer Information]" << std::endl;
     std::cout << glGetString(GL_VERSION) << std::endl;
@@ -218,6 +220,11 @@ bool Ivy::Graphics::Renderer::IsInitialized(void) {
     return m_Surface != EGL_NO_SURFACE &&
         m_Context != EGL_NO_CONTEXT &&
         m_Display != EGL_NO_DISPLAY;
+}
+
+void Ivy::Graphics::Renderer::SetCullMode(GLenum cullMode) {
+    glCullFace(cullMode);
+    glEnable(GL_CULL_FACE);
 }
 
 void Ivy::Graphics::Renderer::SwapBuffers(void) {

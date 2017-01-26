@@ -16,6 +16,13 @@
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Graphics\Colors.h" />
     <ClInclude Include="Graphics\TestMesh.h" />
+    <ClInclude Include="Graphics\ModelMatrix.h" />
+    <ClInclude Include="Graphics\ProjectionMatrix.h" />
+    <ClInclude Include="Graphics\ViewMatrix.h" />
+    <ClInclude Include="Graphics\ExternalTexture.h" />
+    <ClInclude Include="Graphics\ITexture.h" />
+    <ClInclude Include="Graphics\MemoryMappedTexture.h" />
+    <ClInclude Include="Graphics\IMovable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />

@@ -56,6 +56,7 @@ namespace Ivy {
             bool Create(EGLNativeWindowType window, EGLNativeDisplayType display);
             void Destroy(void);
             bool IsInitialized(void);
+            void SetCullMode(GLenum cullMode);
             void SwapBuffers(void);
 
             EGLint GetRenderer(void) { return m_Renderer; }
