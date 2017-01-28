@@ -45,4 +45,5 @@ namespace Ivy {
         };
     }
 }
+
 #endif // IVY_INDEXBUFFER_H

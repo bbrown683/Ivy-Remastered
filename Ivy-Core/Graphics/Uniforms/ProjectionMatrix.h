@@ -1,10 +1,9 @@
-#ifndef IVY_PROJECTION_MATRIX_H
-#define IVY_PROJECTION_MATRIX_H
+#ifndef IVY_PROJECTIONMATRIX_H
+#define IVY_PROJECTIONMATRIX_H
 
-#include <glm/matrix.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Renderer.h"
+#include "../Renderer.h"
 
 namespace Ivy {
     namespace Graphics {
@@ -16,4 +15,4 @@ namespace Ivy {
     }
 }
 
-#endif // IVY_PROJECTION_MATRIX_H
+#endif // IVY_PROJECTIONMATRIX_H

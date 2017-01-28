@@ -26,7 +26,6 @@ SOFTWARE.
 #define IVY_TEXTURE_H
 
 #include "Program.h"
-#include <FreeImage/FreeImage.h>
 
 namespace Ivy {
     namespace Graphics {

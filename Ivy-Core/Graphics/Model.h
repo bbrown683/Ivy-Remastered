@@ -28,7 +28,6 @@ SOFTWARE.
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
-#include <glm/vec4.hpp>
 
 #include "Mesh.h"
 #include "TestMesh.h"

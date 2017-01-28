@@ -22,49 +22,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef IVY_MESH_H
-#define IVY_MESH_H
+#ifndef IVY_CAMERAMANAGER_H
+#define IVY_CAMERAMANAGER_H
 
-#include <glm/gtc/matrix_transform.hpp>
+#include <queue>
+#include <map>
 
-#include "Program.h"
-#include "VertexBuffer.h"
-#include "ElementBuffer.h"
-#include "UniformBuffer.h"
-#include "Texture.h"
+#include "ICamera.h"
 
 namespace Ivy {
     namespace Graphics {
-        class IVY_API Mesh {
+        class CameraManager {
         public:
-            Mesh(Program* program, std::vector<Vertex> vertices, std::vector<GLushort> indices) :
-                m_Program(program), m_UniformBuffer(m_Program) {
-                m_Vertices = vertices;
-                m_Indices = indices;
-            }
-
-            void Create(void);
-            void Draw(void);
-
-            void SetPosition(glm::vec3 position);
-            void SetRotation(glm::vec3 rotation);
-            void SetScale(glm::vec3 scale);
+            void PushCamera(unsigned int layerID, ICamera* camera);
+            void PopCamera();
 
         private:
-            Program* m_Program;
-
-            std::vector<Vertex> m_Vertices;
-            std::vector<GLushort> m_Indices;
-
-            glm::mat4 m_Translation;
-            glm::mat4 m_Rotation;
-            glm::mat4 m_Scale;
-
-            VertexBuffer m_VertexBuffer;
-            ElementBuffer m_ElementBuffer;
-            UniformBuffer m_UniformBuffer;
-        };
+            std::priority_queue<std::pair<unsigned int, ICamera*>> m_Cameras;
+        };    
     }
 }
 
-#endif // IVY_MESH_H
+#endif // IVY_CAMERAMANAGER_H

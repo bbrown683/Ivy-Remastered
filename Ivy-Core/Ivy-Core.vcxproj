@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\ANGLE\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\glm\include\;$(SolutionDir)Dependencies\FreeImage\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\ANGLE\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\glm\include\;$(SolutionDir)Dependencies\stb\;$(SolutionDir)Dependencies\nuklear\;$(SolutionDir)Dependencies\miniz\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>IVY_STATIC_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Lib>
@@ -84,8 +84,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;assimp.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\$(PlatformTarget)\;$(SolutionDir)Dependencies\FreeImage\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -94,10 +94,10 @@
       <Command>xcopy /f /s /y "$(SolutionDir)Dependencies\ANGLE\bin" "$(OutputPath)"
 xcopy /f /s /y "$(ProjectDir)vert.txt" "$(OutputPath)"
 xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"
-xcopy /f /s /y "$(ProjectDir)cube.ply" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)monocube.dae" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)monocubetexture.png" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
-if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)Dependencies\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"</Command>
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -165,15 +165,26 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Camera.h" />
+    <ClInclude Include="Graphics\Cameras\CameraManager.h" />
+    <ClInclude Include="Graphics\Cameras\FixedCamera.h" />
+    <ClInclude Include="Graphics\Cameras\FreeCamera.h" />
+    <ClInclude Include="Graphics\Cameras\ICamera.h" />
+    <ClInclude Include="Graphics\Cameras\PivotCamera.h" />
     <ClInclude Include="Graphics\Colors.h" />
-    <ClInclude Include="Graphics\ExternalTexture.h" />
-    <ClInclude Include="Graphics\IMovable.h" />
-    <ClInclude Include="Graphics\ITexture.h" />
-    <ClInclude Include="Graphics\MemoryMappedTexture.h" />
-    <ClInclude Include="Graphics\ModelMatrix.h" />
-    <ClInclude Include="Graphics\ProjectionMatrix.h" />
+    <ClInclude Include="Graphics\Buffers\FrameBuffer.h" />
+    <ClInclude Include="Graphics\Buffers\IBuffer.h" />
+    <ClInclude Include="Graphics\Objects\IObject.h" />
+    <ClInclude Include="Graphics\Objects\Skybox\Skybox.h" />
+    <ClInclude Include="Graphics\Objects\Text\Text.h" />
+    <ClInclude Include="Graphics\Textures\CubeMap.h" />
+    <ClInclude Include="Graphics\Textures\ITexture.h" />
+    <ClInclude Include="Graphics\Uniforms\ModelMatrix.h" />
+    <ClInclude Include="Graphics\Uniforms\ProjectionMatrix.h" />
     <ClInclude Include="Graphics\TestMesh.h" />
-    <ClInclude Include="Graphics\ViewMatrix.h" />
+    <ClInclude Include="Graphics\Textures\Texture2D.h" />
+    <ClInclude Include="Graphics\Uniforms\ViewMatrix.h" />
+    <ClInclude Include="Graphics\UI\IWidget.h" />
+    <ClInclude Include="Graphics\UI\UIManager.h" />
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="Graphics\ElementBuffer.h" />
     <ClInclude Include="Graphics\Mesh.h" />
@@ -189,8 +200,14 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\Camera.cpp" />
+    <ClCompile Include="Graphics\Cameras\CameraManager.cpp" />
     <ClCompile Include="Graphics\Colors.cpp" />
+    <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
+    <ClCompile Include="Graphics\Objects\Skybox\Skybox.cpp" />
+    <ClCompile Include="Graphics\Objects\Text\Text.cpp" />
     <ClCompile Include="Graphics\TestMesh.cpp" />
+    <ClCompile Include="Graphics\Textures\CubeMap.cpp" />
+    <ClCompile Include="Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="IO\File.cpp" />
     <ClCompile Include="Graphics\ElementBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
@@ -206,9 +223,6 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
   <ItemGroup>
     <Text Include="frag.txt" />
     <Text Include="vert.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cube.ply" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -25,8 +25,6 @@ SOFTWARE.
 #ifndef IVY_TESTMESH_H
 #define IVY_TESTMESH_H
 
-#include <glm/vec4.hpp>
-#include <glm/matrix.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Program.h"

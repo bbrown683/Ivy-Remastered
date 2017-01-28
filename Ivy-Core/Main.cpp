@@ -18,7 +18,7 @@ int main(int argc, char** argv)
         program.Create();
 
         Camera camera(&program, glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(0.0f, 0.0f, 0.0f), 
-            glm::radians(45.0f), 1080, 720);
+            glm::radians(45.0f), 1080, 720, 0.1f, 1000.0f);
         camera.Create();
 
         Model model(&program);
@@ -45,7 +45,9 @@ int main(int argc, char** argv)
             model3.Draw();
             model4.Draw();
 
-            model.SetRotation(glm::vec3(0.0f, 0.000005f, 0.0f));
+            model2.SetRotation(glm::vec3(1.0f, 1.0f, 0.0f));
+            model3.SetRotation(glm::vec3(0.0f, 1.0f, 0.0f));
+            model4.SetRotation(glm::vec3(0.0f, 0.0f, 1.0f));
 
             renderer.SwapBuffers();
             window.PollWindowEvents();

@@ -22,35 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 #include "Texture.h"
 
 bool Ivy::Graphics::Texture::CreateFromFile(Program* program) {
-    // Use free image to get load the image and retrieve its m_Bitmap.
-    FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(m_FilePath.c_str());
-    if (!FreeImage_FIFSupportsReading(fif))
-        return false;
+    int width;
+    int height;
+    int channels;
+    stbi_set_flip_vertically_on_load(true);
+    m_Bitmap = stbi_load(m_FilePath.c_str(), &width, &height, &channels, STBI_rgb_alpha);
 
-    FIBITMAP* bitmap = FreeImage_Load(fif, m_FilePath.c_str());
-    if (!bitmap)
-        return false;
-
-    // Needs to be a 32 bit bitmap.
-    if (FreeImage_GetBPP(bitmap) != 32) {
-        FIBITMAP* temp = bitmap;
-        bitmap = FreeImage_ConvertTo32Bits(bitmap);
-        FreeImage_Unload(temp);
-    }
-
-    // We have to flip the bitmap for it to appear properly.
-    FreeImage_FlipVertical(bitmap);
-
-    // Get bitmap attributes.
-    m_Width = FreeImage_GetWidth(bitmap);
-    m_Height = FreeImage_GetHeight(bitmap);
-    m_Pitch = FreeImage_GetPitch(bitmap);
-    
-    // Retrieve the bits of the bitmap.
-    m_Bitmap = reinterpret_cast<GLubyte*>(FreeImage_GetBits(bitmap));
     if (!m_Bitmap)
         return false;
 
@@ -64,15 +47,12 @@ bool Ivy::Graphics::Texture::CreateFromFile(Program* program) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Width, m_Height, 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 
         0, GL_RGBA, GL_UNSIGNED_BYTE, m_Bitmap);
     glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
     m_SamplerLocation = glGetUniformLocation(program->GetProgramID(), "ivy_Sampler0");
-
-    // We are now done with bitmap, unload to prevent leaks.
-    FreeImage_Unload(bitmap);
 
     return true;
 }

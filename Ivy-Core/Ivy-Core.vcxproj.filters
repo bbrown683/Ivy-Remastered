@@ -16,13 +16,24 @@
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Graphics\Colors.h" />
     <ClInclude Include="Graphics\TestMesh.h" />
-    <ClInclude Include="Graphics\ModelMatrix.h" />
-    <ClInclude Include="Graphics\ProjectionMatrix.h" />
-    <ClInclude Include="Graphics\ViewMatrix.h" />
-    <ClInclude Include="Graphics\ExternalTexture.h" />
-    <ClInclude Include="Graphics\ITexture.h" />
-    <ClInclude Include="Graphics\MemoryMappedTexture.h" />
-    <ClInclude Include="Graphics\IMovable.h" />
+    <ClInclude Include="Graphics\Textures\ITexture.h" />
+    <ClInclude Include="Graphics\Textures\CubeMap.h" />
+    <ClInclude Include="Graphics\Textures\Texture2D.h" />
+    <ClInclude Include="Graphics\Cameras\ICamera.h" />
+    <ClInclude Include="Graphics\Cameras\CameraManager.h" />
+    <ClInclude Include="Graphics\Cameras\PivotCamera.h" />
+    <ClInclude Include="Graphics\Cameras\FixedCamera.h" />
+    <ClInclude Include="Graphics\Buffers\FrameBuffer.h" />
+    <ClInclude Include="Graphics\Buffers\IBuffer.h" />
+    <ClInclude Include="Graphics\Objects\Skybox\Skybox.h" />
+    <ClInclude Include="Graphics\Objects\IObject.h" />
+    <ClInclude Include="Graphics\UI\UIManager.h" />
+    <ClInclude Include="Graphics\UI\IWidget.h" />
+    <ClInclude Include="Graphics\Uniforms\ViewMatrix.h" />
+    <ClInclude Include="Graphics\Uniforms\ProjectionMatrix.h" />
+    <ClInclude Include="Graphics\Uniforms\ModelMatrix.h" />
+    <ClInclude Include="Graphics\Cameras\FreeCamera.h" />
+    <ClInclude Include="Graphics\Objects\Text\Text.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />
@@ -39,12 +50,15 @@
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\Colors.cpp" />
     <ClCompile Include="Graphics\TestMesh.cpp" />
+    <ClCompile Include="Graphics\Textures\CubeMap.cpp" />
+    <ClCompile Include="Graphics\Cameras\CameraManager.cpp" />
+    <ClCompile Include="Graphics\Textures\Texture2D.cpp" />
+    <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
+    <ClCompile Include="Graphics\Objects\Skybox\Skybox.cpp" />
+    <ClCompile Include="Graphics\Objects\Text\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />
     <Text Include="frag.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cube.ply" />
   </ItemGroup>
 </Project>

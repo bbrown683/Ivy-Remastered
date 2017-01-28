@@ -183,7 +183,7 @@ bool Ivy::Graphics::Renderer::Create(EGLNativeWindowType window, EGLNativeDispla
         return false;
     }
 
-    // Enable depth and stencil testing.
+    // Enable default depth and stencil testing.
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_STENCIL_TEST);
 

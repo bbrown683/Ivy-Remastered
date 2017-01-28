@@ -22,49 +22,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef IVY_MESH_H
-#define IVY_MESH_H
+#ifndef IVY_TEXTURE2D_H
+#define IVY_TEXTURE2D_H
 
-#include <glm/gtc/matrix_transform.hpp>
-
-#include "Program.h"
-#include "VertexBuffer.h"
-#include "ElementBuffer.h"
-#include "UniformBuffer.h"
-#include "Texture.h"
+#include "ITexture.h"
+#include "../Program.h"
 
 namespace Ivy {
     namespace Graphics {
-        class IVY_API Mesh {
+        class IVY_API Texture2D : public ITexture {
         public:
-            Mesh(Program* program, std::vector<Vertex> vertices, std::vector<GLushort> indices) :
-                m_Program(program), m_UniformBuffer(m_Program) {
-                m_Vertices = vertices;
-                m_Indices = indices;
-            }
+            Texture2D(Program* program, std::string* textures);
 
-            void Create(void);
-            void Draw(void);
+            bool Create() override;
+            void MakeActive() override;
+            void MakeInactive() override;
 
-            void SetPosition(glm::vec3 position);
-            void SetRotation(glm::vec3 rotation);
-            void SetScale(glm::vec3 scale);
+            GLuint GetSamplerID() override;
+            GLuint GetTextureWidth() override;
+            GLuint GetTextureHeight() override;
+            GLuint GetTexturePitch() override;
 
         private:
+
             Program* m_Program;
-
-            std::vector<Vertex> m_Vertices;
-            std::vector<GLushort> m_Indices;
-
-            glm::mat4 m_Translation;
-            glm::mat4 m_Rotation;
-            glm::mat4 m_Scale;
-
-            VertexBuffer m_VertexBuffer;
-            ElementBuffer m_ElementBuffer;
-            UniformBuffer m_UniformBuffer;
+            std::string* m_Textures;
         };
     }
 }
 
-#endif // IVY_MESH_H
+#endif // IVY_TEXTURE2D_H

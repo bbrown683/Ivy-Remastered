@@ -33,7 +33,7 @@ SOFTWARE.
 #define GL_GLEXT_PROTOTYPES 1
 #endif 
 
-#include <glm/vec3.hpp>
+#include <glm/glm.hpp>
 
 #include <export.h>
 #include <EGL/egl.h>

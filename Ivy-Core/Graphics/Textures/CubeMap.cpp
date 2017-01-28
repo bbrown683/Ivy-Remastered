@@ -22,44 +22,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef IVY_UNIFORMBUFFER_H
-#define IVY_UNIFORMBUFFER_H
+#include "CubeMap.h"
 
-#include <glm/gtc/type_ptr.hpp>
-
-#include "Program.h"
-
-namespace Ivy {
-    namespace Graphics {
-        class IVY_API UniformBuffer {
-        public:
-            UniformBuffer(Program* program) : m_Program(program) {}
-        
-            void GetModelLocation(void);
-            void GetViewLocation(void);
-            void GetProjectionLocation(void);
-
-            glm::mat4 GetModelMatrix(void);
-            glm::mat4 GetViewMatrix(void);
-            glm::mat4 GetProjectionMatrix(void);
-
-            void SetModelMatrix(glm::mat4 matrix);
-            void SetViewMatrix(glm::mat4 matrix);
-            void SetProjectionMatrix(glm::mat4 matrix);
-
-        private:
-
-            Program* m_Program;
-
-            GLint m_ModelLocation;
-            GLint m_ViewLocation;
-            GLint m_ProjectionLocation;
-
-            glm::mat4 m_ModelMatrix;
-            glm::mat4 m_ViewMatrix;
-            glm::mat4 m_ProjectionMatrix;
-        };
-    }
+Ivy::Graphics::CubeMap::CubeMap(std::string* textures) {
+    m_Textures = textures;
 }
 
-#endif // IVY_UNIFORMBUFFER_H
+bool Ivy::Graphics::CubeMap::Create() {
+    return false;
+}
+
+void Ivy::Graphics::CubeMap::MakeActive() {
+}
+
+void Ivy::Graphics::CubeMap::MakeInactive() {
+
+}
+
+GLuint Ivy::Graphics::CubeMap::GetSamplerID() {
+    return GLuint();
+}
+
+GLuint Ivy::Graphics::CubeMap::GetTextureWidth() {
+    return GLuint();
+}
+
+GLuint Ivy::Graphics::CubeMap::GetTextureHeight() {
+    return GLuint();
+}
+
+GLuint Ivy::Graphics::CubeMap::GetTexturePitch() {
+    return GLuint();
+}
