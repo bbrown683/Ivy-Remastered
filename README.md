@@ -1,8 +1,9 @@
 # Ivy
 
 # Dependencies 
-ANGLE
-Assimp
-FreeImage
-FreeType
-GLM 
+* ANGLE
+* Assimp
+* GLM
+* Miniz
+* STB
+* Nuklear
