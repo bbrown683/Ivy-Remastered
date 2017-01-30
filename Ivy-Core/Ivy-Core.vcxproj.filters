@@ -6,11 +6,8 @@
     <ClInclude Include="Graphics\Model.h" />
     <ClInclude Include="Graphics\Renderer.h" />
     <ClInclude Include="Graphics\Program.h" />
-    <ClInclude Include="Graphics\VertexBuffer.h" />
-    <ClInclude Include="Graphics\Vertex.h" />
     <ClInclude Include="Graphics\Texture.h" />
     <ClInclude Include="Graphics\Mesh.h" />
-    <ClInclude Include="Graphics\ElementBuffer.h" />
     <ClInclude Include="Graphics\UniformBuffer.h" />
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="Graphics\Camera.h" />
@@ -29,11 +26,15 @@
     <ClInclude Include="Graphics\Objects\IObject.h" />
     <ClInclude Include="Graphics\UI\UIManager.h" />
     <ClInclude Include="Graphics\UI\IWidget.h" />
-    <ClInclude Include="Graphics\Uniforms\ViewMatrix.h" />
-    <ClInclude Include="Graphics\Uniforms\ProjectionMatrix.h" />
-    <ClInclude Include="Graphics\Uniforms\ModelMatrix.h" />
     <ClInclude Include="Graphics\Cameras\FreeCamera.h" />
     <ClInclude Include="Graphics\Objects\Text\Text.h" />
+    <ClInclude Include="Graphics\Textures\Spritesheet.h" />
+    <ClInclude Include="Graphics\Matrices\ModelMatrix.h" />
+    <ClInclude Include="Graphics\Matrices\ProjectionMatrix.h" />
+    <ClInclude Include="Graphics\Matrices\ViewMatrix.h" />
+    <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffers\ElementBuffer.h" />
+    <ClInclude Include="Graphics\Buffers\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />
@@ -41,9 +42,7 @@
     <ClCompile Include="Graphics\Model.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
     <ClCompile Include="Graphics\Program.cpp" />
-    <ClCompile Include="Graphics\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
-    <ClCompile Include="Graphics\ElementBuffer.cpp" />
     <ClCompile Include="Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Graphics\Texture.cpp" />
     <ClCompile Include="IO\File.cpp" />
@@ -56,6 +55,9 @@
     <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Graphics\Objects\Skybox\Skybox.cpp" />
     <ClCompile Include="Graphics\Objects\Text\Text.cpp" />
+    <ClCompile Include="Graphics\Textures\Spritesheet.cpp" />
+    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffers\ElementBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />

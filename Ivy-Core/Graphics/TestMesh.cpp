@@ -25,8 +25,8 @@ SOFTWARE.
 #include "TestMesh.h"
 
 void Ivy::Graphics::TestMesh::Create(void) {
-    m_VertexBuffer.SetVertices(m_Vertices);
-    m_ElementBuffer.SetIndices(m_Indices);
+    m_VertexBuffer.SetData(m_Vertices);
+    m_ElementBuffer.SetData(m_Indices);
 
     m_VertexBuffer.Create();
     m_ElementBuffer.Create();

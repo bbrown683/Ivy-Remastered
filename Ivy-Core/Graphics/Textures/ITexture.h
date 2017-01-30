@@ -29,7 +29,7 @@ SOFTWARE.
 
 namespace Ivy {
     namespace Graphics {
-        struct ITexture {
+        struct IVY_API ITexture {
             virtual bool Create() = 0;
             virtual void MakeActive() = 0;
             virtual void MakeInactive() = 0;

@@ -21,3 +21,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+#ifndef IVY_IBUFFER_H   
+#define IVY_IBUFFER_H
+
+#include <vector>
+
+namespace Ivy {
+    namespace Graphics {
+        template<typename T>
+        struct IBuffer {
+            virtual void Bind(void) = 0;
+            virtual void Create(void) = 0;
+            virtual void Destroy(void) = 0;
+            virtual void Draw(void) = 0;
+            virtual void Unbind(void) = 0;
+            virtual void SetData(std::vector<T> data) = 0;
+        };
+    }
+}
+
+#endif // IVY_IBUFFER_H

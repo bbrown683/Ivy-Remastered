@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "Texture2D.h"
 
-Ivy::Graphics::Texture2D::Texture2D(Program * program, std::string * textures) {
+Ivy::Graphics::Texture2D::Texture2D(Program * program, std::string* textures) {
     m_Program = program;
     m_Textures = textures;
 }

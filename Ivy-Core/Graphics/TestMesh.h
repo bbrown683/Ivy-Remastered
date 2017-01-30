@@ -28,8 +28,8 @@ SOFTWARE.
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Program.h"
-#include "VertexBuffer.h"
-#include "ElementBuffer.h"
+#include "Buffers/VertexBuffer.h"
+#include "Buffers/ElementBuffer.h"
 #include "UniformBuffer.h"
 #include "Texture.h"
 

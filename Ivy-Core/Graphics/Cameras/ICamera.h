@@ -25,10 +25,19 @@ SOFTWARE.
 #ifndef IVY_ICAMERA_H
 #define IVY_ICAMERA_H
 
+#include "glm/glm.hpp"
+
 namespace Ivy {
     namespace Graphics {
         struct ICamera {
-            virtual bool Create() = 0;
+        public:
+            virtual bool Create(void) = 0;
+            virtual glm::vec3 GetCameraPosition(void) = 0;
+            virtual void SetCameraPosition(glm::vec3 position) = 0;
+            virtual glm::vec3 GetTargetPosition(void) = 0;
+            virtual void SetTargetPosition(glm::vec3 position) = 0;
+            virtual glm::vec3 GetCameraOrientation(void) = 0;
+            virtual void SetCameraOrientation(glm::vec3 orientation) = 0;
         };
     }
 }
