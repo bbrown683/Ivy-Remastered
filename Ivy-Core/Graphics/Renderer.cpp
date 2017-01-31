@@ -227,6 +227,10 @@ void Ivy::Graphics::Renderer::SetCullMode(GLenum cullMode) {
     glEnable(GL_CULL_FACE);
 }
 
+void Ivy::Graphics::Renderer::SetFrontFace(GLenum frontFace) {
+    glFrontFace(frontFace);
+}
+
 void Ivy::Graphics::Renderer::SwapBuffers(void) {
     // Swaps the front and back buffer.
     eglSwapBuffers(m_Display, m_Surface);

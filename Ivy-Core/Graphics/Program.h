@@ -55,7 +55,6 @@ namespace Ivy {
             std::string GetFragmentShaderPath(void) { return m_FragmentShaderPath; }
             std::string GetFragmentShaderSource(void) { return m_FragmentShaderSource; }
 
-
         private:
 
             bool SetShaderSource(GLuint shaderID, std::string shaderPath, std::string* shaderSource);

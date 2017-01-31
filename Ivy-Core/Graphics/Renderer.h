@@ -57,6 +57,7 @@ namespace Ivy {
             void Destroy(void);
             bool IsInitialized(void);
             void SetCullMode(GLenum cullMode);
+            void SetFrontFace(GLenum frontFace);
             void SwapBuffers(void);
 
             EGLint GetRenderer(void) { return m_Renderer; }

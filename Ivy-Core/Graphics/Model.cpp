@@ -57,6 +57,20 @@ bool Ivy::Graphics::Model::Load(std::string filePath) {
             else
                 vertex.m_Position = glm::vec3();
             
+            for (unsigned int numColorChannels = 0; numColorChannels < mesh->GetNumColorChannels(); 
+                numColorChannels++) {
+                if (numColorChannels == 0) {
+                    aiColor4D color0 = mesh->mColors[0][j];
+                    vertex.m_Color0 = glm::vec4(color0.r, color0.g, color0.b, color0.a);
+                }
+                else
+                    vertex.m_Color0 = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+                if (numColorChannels == 1) {
+                    aiColor4D color0 = mesh->mColors[1][j];
+                    vertex.m_Color0 = glm::vec4(color0.r, color0.g, color0.b, color0.a);
+                }
+            }
             if (mesh->HasTextureCoords(0)) {
                 aiVector3D texCoord0 = mesh->mTextureCoords[0][j];
                 vertex.m_TexCoord0 = glm::vec2(texCoord0.x, texCoord0.y);
@@ -70,14 +84,6 @@ bool Ivy::Graphics::Model::Load(std::string filePath) {
             }
             else
                 vertex.m_Normal = glm::vec3();
-
-
-            if (mesh->HasVertexColors(0)) {
-                aiColor4D color0 = mesh->mColors[0][j];
-                vertex.m_Color0 = glm::vec4(color0.r, color0.g, color0.b, color0.a);
-            }
-            else
-                vertex.m_Color0 = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
             vertices.push_back(vertex);
         }

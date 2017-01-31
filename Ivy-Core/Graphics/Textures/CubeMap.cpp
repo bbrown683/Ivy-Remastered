@@ -39,7 +39,7 @@ void Ivy::Graphics::CubeMap::MakeInactive() {
 
 }
 
-GLuint Ivy::Graphics::CubeMap::GetSamplerID() {
+GLuint Ivy::Graphics::CubeMap::GetSamplerLocation() {
     return GLuint();
 }
 

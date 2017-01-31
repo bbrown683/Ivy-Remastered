@@ -22,4 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
+#ifndef IVY_ATLAS_H
+#define IVY_ATLAS_H
+
+#include "Texture2D.h"
+
+namespace Ivy {
+    namespace Graphics {
+        class IVY_API Atlas {
+            
+        };
+    }
+}
+
+#endif

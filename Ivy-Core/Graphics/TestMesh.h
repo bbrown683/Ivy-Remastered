@@ -32,6 +32,7 @@ SOFTWARE.
 #include "Buffers/ElementBuffer.h"
 #include "UniformBuffer.h"
 #include "Texture.h"
+#include "Textures/Texture2D.h"
 
 namespace Ivy {
     namespace Graphics {

@@ -16,25 +16,29 @@
     <ClInclude Include="Graphics\Textures\ITexture.h" />
     <ClInclude Include="Graphics\Textures\CubeMap.h" />
     <ClInclude Include="Graphics\Textures\Texture2D.h" />
-    <ClInclude Include="Graphics\Cameras\ICamera.h" />
-    <ClInclude Include="Graphics\Cameras\CameraManager.h" />
-    <ClInclude Include="Graphics\Cameras\PivotCamera.h" />
-    <ClInclude Include="Graphics\Cameras\FixedCamera.h" />
     <ClInclude Include="Graphics\Buffers\FrameBuffer.h" />
     <ClInclude Include="Graphics\Buffers\IBuffer.h" />
     <ClInclude Include="Graphics\Objects\Skybox\Skybox.h" />
     <ClInclude Include="Graphics\Objects\IObject.h" />
     <ClInclude Include="Graphics\UI\UIManager.h" />
     <ClInclude Include="Graphics\UI\IWidget.h" />
-    <ClInclude Include="Graphics\Cameras\FreeCamera.h" />
     <ClInclude Include="Graphics\Objects\Text\Text.h" />
-    <ClInclude Include="Graphics\Textures\Spritesheet.h" />
     <ClInclude Include="Graphics\Matrices\ModelMatrix.h" />
     <ClInclude Include="Graphics\Matrices\ProjectionMatrix.h" />
     <ClInclude Include="Graphics\Matrices\ViewMatrix.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffers\ElementBuffer.h" />
     <ClInclude Include="Graphics\Buffers\Vertex.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\CameraManager.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\FixedCamera.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\FreeCamera.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\ICamera.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\PivotCamera.h" />
+    <ClInclude Include="Graphics\Textures\Atlas.h" />
+    <ClInclude Include="Graphics\Objects\Sprite.h" />
+    <ClInclude Include="Graphics\Objects\Sources\LightSource\LightSource.h" />
+    <ClInclude Include="Graphics\Objects\Sources\AudioSource\AudioSource.h" />
+    <ClInclude Include="Graphics\DepthStencil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />
@@ -50,14 +54,16 @@
     <ClCompile Include="Graphics\Colors.cpp" />
     <ClCompile Include="Graphics\TestMesh.cpp" />
     <ClCompile Include="Graphics\Textures\CubeMap.cpp" />
-    <ClCompile Include="Graphics\Cameras\CameraManager.cpp" />
     <ClCompile Include="Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Graphics\Objects\Skybox\Skybox.cpp" />
     <ClCompile Include="Graphics\Objects\Text\Text.cpp" />
-    <ClCompile Include="Graphics\Textures\Spritesheet.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffers\ElementBuffer.cpp" />
+    <ClCompile Include="Graphics\Objects\Cameras\CameraManager.cpp" />
+    <ClCompile Include="Graphics\Objects\Cameras\PivotCamera.cpp" />
+    <ClCompile Include="Graphics\Textures\Atlas.cpp" />
+    <ClCompile Include="Graphics\DepthStencil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />

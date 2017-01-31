@@ -28,25 +28,36 @@ SOFTWARE.
 #include "ITexture.h"
 #include "../Program.h"
 
+#include <FreeImage.h>
+
 namespace Ivy {
     namespace Graphics {
         class IVY_API Texture2D : public ITexture {
         public:
-            Texture2D(Program* program, std::string* textures);
+            Texture2D(Program* program, std::string filePath, GLuint textureSlot);
 
-            bool Create() override;
-            void MakeActive() override;
-            void MakeInactive() override;
+            virtual bool Create() override;
+            virtual void MakeActive() override;
+            virtual void MakeInactive() override;
 
-            GLuint GetSamplerID() override;
-            GLuint GetTextureWidth() override;
-            GLuint GetTextureHeight() override;
-            GLuint GetTexturePitch() override;
+            virtual GLuint GetTextureID() override;
+            virtual GLuint GetSamplerLocation() override;
+            virtual GLuint GetTextureWidth() override;
+            virtual GLuint GetTextureHeight() override;
+            virtual GLuint GetTexturePitch() override;
 
         private:
 
             Program* m_Program;
-            std::string* m_Textures;
+            std::string m_FilePath;
+            GLuint m_TextureSlot;
+
+            GLuint m_TextureID;
+            GLuint m_SamplerLocation;
+            GLuint m_Width;
+            GLuint m_Height;
+            GLuint m_Pitch;
+            GLubyte* m_Bitmap;
         };
     }
 }

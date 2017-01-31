@@ -2,6 +2,13 @@ varying mediump vec4 frag_Color0;
 varying mediump vec2 frag_TexCoord0;
 
 uniform sampler2D ivy_Sampler0;
+uniform sampler2D ivy_Sampler1;
+uniform sampler2D ivy_Sampler2;
+uniform sampler2D ivy_Sampler3;
+uniform sampler2D ivy_Sampler4;
+uniform sampler2D ivy_Sampler5;
+uniform sampler2D ivy_Sampler6;
+uniform sampler2D ivy_Sampler7;
 
 void main() {
     gl_FragColor = texture2D(ivy_Sampler0, frag_TexCoord0);

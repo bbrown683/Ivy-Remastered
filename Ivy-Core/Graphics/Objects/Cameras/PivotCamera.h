@@ -21,3 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+#include "../IObject.h"
+#include "ICamera.h"
+
+namespace Ivy {
+    namespace Graphics {
+        class PivotCamera : public ICamera {
+            virtual bool Create(void) override;
+            virtual glm::vec3 GetCameraPosition(void) override;
+            virtual void SetCameraPosition(glm::vec3 position) override;
+            virtual glm::vec3 GetTargetPosition(void) override;
+            virtual void SetTargetPosition(glm::vec3 position) override;
+            virtual glm::vec3 GetCameraOrientation(void) override;
+            virtual void SetCameraOrientation(glm::vec3 orientation) override;
+        };
+    }
+}

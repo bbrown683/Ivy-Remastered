@@ -34,7 +34,8 @@ namespace Ivy {
             virtual void MakeActive() = 0;
             virtual void MakeInactive() = 0;
 
-            virtual GLuint GetSamplerID() = 0;
+            virtual GLuint GetTextureID() = 0;
+            virtual GLuint GetSamplerLocation() = 0;
             virtual GLuint GetTextureWidth() = 0;
             virtual GLuint GetTextureHeight() = 0;
             virtual GLuint GetTexturePitch() = 0;

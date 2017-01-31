@@ -37,7 +37,7 @@ namespace Ivy {
             void MakeActive() override;
             void MakeInactive() override;
 
-            GLuint GetSamplerID() override;
+            GLuint GetSamplerLocation() override;
             GLuint GetTextureWidth() override;
             GLuint GetTextureHeight() override;
             GLuint GetTexturePitch() override;

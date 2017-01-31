@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\ANGLE\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\glm\include\;$(SolutionDir)Dependencies\stb\;$(SolutionDir)Dependencies\nuklear\;$(SolutionDir)Dependencies\miniz\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\ANGLE\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\glm\include\;$(SolutionDir)Dependencies\stb\;$(SolutionDir)Dependencies\nuklear\;$(SolutionDir)Dependencies\miniz\;$(SolutionDir)Dependencies\FreeImage\include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>IVY_STATIC_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Lib>
@@ -84,14 +84,15 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;assimp.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\$(PlatformTarget)\;$(SolutionDir)Dependencies\FreeImage\lib\$(PlatformTarget)\</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <PostBuildEvent>
       <Command>xcopy /f /s /y "$(SolutionDir)Dependencies\ANGLE\bin" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)Dependencies\FreeImage\bin\$(PlatformTarget)" "$(OutputPath)"
 xcopy /f /s /y "$(ProjectDir)vert.txt" "$(OutputPath)"
 xcopy /f /s /y "$(ProjectDir)frag.txt" "$(OutputPath)"
 xcopy /f /s /y "$(ProjectDir)monocube.dae" "$(OutputPath)"
@@ -188,20 +189,24 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Camera.h" />
-    <ClInclude Include="Graphics\Cameras\CameraManager.h" />
-    <ClInclude Include="Graphics\Cameras\FixedCamera.h" />
-    <ClInclude Include="Graphics\Cameras\FreeCamera.h" />
-    <ClInclude Include="Graphics\Cameras\ICamera.h" />
-    <ClInclude Include="Graphics\Cameras\PivotCamera.h" />
+    <ClInclude Include="Graphics\Objects\Sources\AudioSource\AudioSource.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\CameraManager.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\FixedCamera.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\FreeCamera.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\ICamera.h" />
+    <ClInclude Include="Graphics\Objects\Cameras\PivotCamera.h" />
     <ClInclude Include="Graphics\Colors.h" />
     <ClInclude Include="Graphics\Buffers\FrameBuffer.h" />
     <ClInclude Include="Graphics\Buffers\IBuffer.h" />
     <ClInclude Include="Graphics\Objects\IObject.h" />
+    <ClInclude Include="Graphics\Objects\Sources\LightSource\LightSource.h" />
     <ClInclude Include="Graphics\Objects\Skybox\Skybox.h" />
+    <ClInclude Include="Graphics\Objects\Sprite.h" />
     <ClInclude Include="Graphics\Objects\Text\Text.h" />
+    <ClInclude Include="Graphics\DepthStencil.h" />
     <ClInclude Include="Graphics\Textures\CubeMap.h" />
     <ClInclude Include="Graphics\Textures\ITexture.h" />
-    <ClInclude Include="Graphics\Textures\Spritesheet.h" />
+    <ClInclude Include="Graphics\Textures\Atlas.h" />
     <ClInclude Include="Graphics\Matrices\ModelMatrix.h" />
     <ClInclude Include="Graphics\Matrices\ProjectionMatrix.h" />
     <ClInclude Include="Graphics\TestMesh.h" />
@@ -224,14 +229,16 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\Camera.cpp" />
-    <ClCompile Include="Graphics\Cameras\CameraManager.cpp" />
+    <ClCompile Include="Graphics\DepthStencil.cpp" />
+    <ClCompile Include="Graphics\Objects\Cameras\CameraManager.cpp" />
     <ClCompile Include="Graphics\Colors.cpp" />
     <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
+    <ClCompile Include="Graphics\Objects\Cameras\PivotCamera.cpp" />
     <ClCompile Include="Graphics\Objects\Skybox\Skybox.cpp" />
     <ClCompile Include="Graphics\Objects\Text\Text.cpp" />
     <ClCompile Include="Graphics\TestMesh.cpp" />
     <ClCompile Include="Graphics\Textures\CubeMap.cpp" />
-    <ClCompile Include="Graphics\Textures\Spritesheet.cpp" />
+    <ClCompile Include="Graphics\Textures\Atlas.cpp" />
     <ClCompile Include="Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="IO\File.cpp" />
     <ClCompile Include="Graphics\Buffers\ElementBuffer.cpp" />

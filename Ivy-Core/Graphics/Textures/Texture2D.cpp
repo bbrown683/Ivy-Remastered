@@ -24,33 +24,98 @@ SOFTWARE.
 
 #include "Texture2D.h"
 
-Ivy::Graphics::Texture2D::Texture2D(Program * program, std::string* textures) {
+Ivy::Graphics::Texture2D::Texture2D(Program* program, std::string filePath, GLuint textureSlot) {
     m_Program = program;
-    m_Textures = textures;
+    m_FilePath = filePath;
+    m_TextureSlot = textureSlot;
 }
 
 bool Ivy::Graphics::Texture2D::Create() {
-    return false;
+    FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(m_FilePath.c_str());
+    if (!FreeImage_FIFSupportsReading(fif))
+         return false;
+    
+    FIBITMAP* bitmap = FreeImage_Load(fif, m_FilePath.c_str());
+    if (!bitmap)
+         return false;
+    
+    // Needs to be a 32 bit bitmap.
+    if (FreeImage_GetBPP(bitmap) != 32) {
+        FIBITMAP* temp = bitmap;
+        bitmap = FreeImage_ConvertTo32Bits(bitmap);
+        FreeImage_Unload(temp); 
+    }
+    
+    // We have to flip the bitmap for it to appear properly.
+    FreeImage_FlipVertical(bitmap);
+    
+    // Get bitmap attributes.
+    m_Width = FreeImage_GetWidth(bitmap);
+    m_Height = FreeImage_GetHeight(bitmap);
+    m_Pitch = FreeImage_GetPitch(bitmap);
+    
+    // Retrieve the bits of the bitmap.
+    m_Bitmap = reinterpret_cast<GLubyte*>(FreeImage_GetBits(bitmap));
+    if (!m_Bitmap)
+         return false;
+
+    glGenTextures(1, &m_TextureID);
+    glBindTexture(GL_TEXTURE_2D, m_TextureID);
+    
+            // Set our texture parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Bitmap);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, GL_NONE);
+
+    m_SamplerLocation = glGetUniformLocation(m_Program->GetProgramID(), "ivy_Sampler" + m_TextureSlot);
+    
+    // We are now done with bitmap, unload to prevent leaks.
+    FreeImage_Unload(bitmap);
+    
+    return true;
 }
 
 void Ivy::Graphics::Texture2D::MakeActive() {
+    switch (m_TextureSlot) {
+    case 0: glActiveTexture(GL_TEXTURE0); break;
+    case 1: glActiveTexture(GL_TEXTURE1); break;
+    case 2: glActiveTexture(GL_TEXTURE2); break;
+    case 3: glActiveTexture(GL_TEXTURE3); break;
+    case 4: glActiveTexture(GL_TEXTURE4); break;
+    case 5: glActiveTexture(GL_TEXTURE5); break;
+    case 6: glActiveTexture(GL_TEXTURE6); break;
+    case 7: glActiveTexture(GL_TEXTURE7); break;
+    }
+    glBindTexture(GL_TEXTURE_2D, m_TextureID);
+    glUniform1i(m_SamplerLocation, m_TextureSlot);
 }
 
 void Ivy::Graphics::Texture2D::MakeInactive() {
+    glBindTexture(GL_TEXTURE_2D, GL_NONE);
 }
 
-GLuint Ivy::Graphics::Texture2D::GetSamplerID() {
-    return GLuint();
+GLuint Ivy::Graphics::Texture2D::GetTextureID() {
+    return m_TextureID;
+}
+
+GLuint Ivy::Graphics::Texture2D::GetSamplerLocation() {
+    return m_SamplerLocation;
 }
 
 GLuint Ivy::Graphics::Texture2D::GetTextureWidth() {
-    return GLuint();
+    return m_Width;
 }
 
 GLuint Ivy::Graphics::Texture2D::GetTextureHeight() {
-    return GLuint();
+    return m_Height;
 }
 
 GLuint Ivy::Graphics::Texture2D::GetTexturePitch() {
-    return GLuint();
+    return m_Pitch;
 }
