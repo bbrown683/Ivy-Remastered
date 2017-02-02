@@ -33,7 +33,7 @@ namespace Ivy {
     namespace Graphics {
         class IVY_API Camera {
         public:
-            Camera(Program* program, glm::vec3 position, glm::vec3 target, float fieldOfView, unsigned int width, unsigned int height, float clippingPlaneNear, float clippingPlaneFar) :
+            Camera(ShaderProgram* program, glm::vec3 position, glm::vec3 target, float fieldOfView, unsigned int width, unsigned int height, float clippingPlaneNear, float clippingPlaneFar) :
                 m_Program(program), m_UniformBuffer(program) {
                 m_Position = position;
                 m_Target = target;
@@ -53,7 +53,7 @@ namespace Ivy {
 
         private:
 
-            Program* m_Program;
+            ShaderProgram* m_Program;
             UniformBuffer m_UniformBuffer;
 
             glm::vec3 m_Position;

@@ -27,9 +27,11 @@ SOFTWARE.
 
 #include <glm/glm.hpp>
 
+#include "../../Symbols.h"
+
 namespace Ivy {
     namespace Graphics {
-        struct IObject {
+        struct IVY_API IObject {
             virtual glm::vec3 GetPosition(void) = 0;
             virtual glm::vec3 GetOrientation(void) = 0;
             virtual glm::vec3 GetScale(void) = 0;

@@ -27,10 +27,12 @@ SOFTWARE.
 
 #include <vector>
 
+#include "../../Symbols.h"
+
 namespace Ivy {
     namespace Graphics {
         template<typename T>
-        struct IBuffer {
+        struct IVY_API IBuffer {
             virtual void Bind(void) = 0;
             virtual void Create(void) = 0;
             virtual void Destroy(void) = 0;

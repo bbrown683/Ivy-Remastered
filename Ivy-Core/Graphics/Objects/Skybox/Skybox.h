@@ -29,7 +29,7 @@ SOFTWARE.
 
 namespace Ivy {
     namespace Graphics {
-        class Skybox : public IObject {
+        class IVY_API Skybox : public IObject {
             glm::vec3 GetPosition(void) override;
             glm::vec3 GetOrientation(void) override;
             glm::vec3 GetScale(void) override;

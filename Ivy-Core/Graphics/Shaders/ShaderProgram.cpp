@@ -22,13 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Program.h"
+#include "ShaderProgram.h"
 
-Ivy::Graphics::Program::~Program() {
-    Program::Destroy();
+Ivy::Graphics::ShaderProgram::~ShaderProgram() {
+    ShaderProgram::Destroy();
 }
 
-bool Ivy::Graphics::Program::Create(void) {
+bool Ivy::Graphics::ShaderProgram::Create(void) {
     m_VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     m_FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
     if (m_VertexShaderID == 0 || m_FragmentShaderID == 0) {
@@ -109,21 +109,21 @@ bool Ivy::Graphics::Program::Create(void) {
     return true;
 }
 
-void Ivy::Graphics::Program::Destroy(void) {
+void Ivy::Graphics::ShaderProgram::Destroy(void) {
     glDeleteShader(m_VertexShaderID);
     glDeleteShader(m_FragmentShaderID);
     glDeleteProgram(m_ProgramID);
 }
 
-void Ivy::Graphics::Program::MakeActive(void) {
+void Ivy::Graphics::ShaderProgram::MakeActive(void) {
     glUseProgram(m_ProgramID);
 }
 
-void Ivy::Graphics::Program::MakeInactive(void) {
+void Ivy::Graphics::ShaderProgram::MakeInactive(void) {
     glUseProgram(GL_NONE);
 }
 
-bool Ivy::Graphics::Program::SetShaderSource(GLuint shaderID, std::string shaderPath, std::string* shaderSource) {
+bool Ivy::Graphics::ShaderProgram::SetShaderSource(GLuint shaderID, std::string shaderPath, std::string* shaderSource) {
     // Read the shader and check to see if it is empty.
     // Empty signifies the file could not be found or there was no data.
     IO::File file;
@@ -144,7 +144,7 @@ bool Ivy::Graphics::Program::SetShaderSource(GLuint shaderID, std::string shader
     return true;
 }
 
-bool Ivy::Graphics::Program::ValidateShader(GLuint shaderID) {
+bool Ivy::Graphics::ShaderProgram::ValidateShader(GLuint shaderID) {
     GLint compileStatus;
     glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
     if (compileStatus == GL_FALSE) {
@@ -167,7 +167,7 @@ bool Ivy::Graphics::Program::ValidateShader(GLuint shaderID) {
     return true;
 }
 
-bool Ivy::Graphics::Program::ValidateProgramStage(GLuint programID, GLenum stage) {
+bool Ivy::Graphics::ShaderProgram::ValidateProgramStage(GLuint programID, GLenum stage) {
     GLint stageStatus;
     glGetProgramiv(m_ProgramID, stage, &stageStatus);
     if (stageStatus == GL_FALSE) {

@@ -25,16 +25,19 @@ SOFTWARE.
 #ifndef IVY_TEXTURE2D_H
 #define IVY_TEXTURE2D_H
 
-#include "ITexture.h"
-#include "../Program.h"
+#include <assimp/material.h>
 
+#include "ITexture.h"
+#include "../Shaders/ShaderProgram.h"
+
+// include after to avoid conflicts.
 #include <FreeImage.h>
 
 namespace Ivy {
     namespace Graphics {
         class IVY_API Texture2D : public ITexture {
         public:
-            Texture2D(Program* program, std::string filePath, GLuint textureSlot);
+            Texture2D(ShaderProgram* program, std::string filePath, GLuint textureSlot);
 
             virtual bool Create() override;
             virtual void MakeActive() override;
@@ -48,7 +51,7 @@ namespace Ivy {
 
         private:
 
-            Program* m_Program;
+            ShaderProgram* m_Program;
             std::string m_FilePath;
             GLuint m_TextureSlot;
 

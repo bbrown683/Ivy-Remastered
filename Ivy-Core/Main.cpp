@@ -1,6 +1,6 @@
 #include "Window.h"
 #include "Graphics/Camera.h"
-#include "Graphics/Model.h"
+#include "Graphics/Objects/Model/Model.h"
 #include "Graphics/Colors.h"
 
 using namespace Ivy::Graphics;
@@ -14,10 +14,10 @@ int main(int argc, char** argv)
         renderer.Create(window.GetPlatformWindow(), window.GetPlatformDisplay());
         renderer.SetCullMode(GL_BACK);
 
-        Program program("vert.txt", "frag.txt");
+        ShaderProgram program("vert.txt", "frag.txt");
         program.Create();
 
-        Camera camera(&program, glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(0.0f, 0.0f, 0.0f), 
+        Camera camera(&program, glm::vec3(0.0f, 2.0f, -10.0f), glm::vec3(0.0f, 2.0f, 0.0f), 
             glm::radians(45.0f), 1080, 720, 0.1f, 1000.0f);
         camera.Create();
 
@@ -41,9 +41,12 @@ int main(int argc, char** argv)
             renderer.Clear(Colors::CornflowerBlue);
             
             model.Draw();
+            model.SetRotation(glm::vec3(0.0f, 0.0005f, 0.0f));
+
             model2.Draw();
             model3.Draw();
             model4.Draw();
+
 
             model2.SetRotation(glm::vec3(1.0f, 1.0f, 0.0f));
             model3.SetRotation(glm::vec3(0.0f, 1.0f, 0.0f));

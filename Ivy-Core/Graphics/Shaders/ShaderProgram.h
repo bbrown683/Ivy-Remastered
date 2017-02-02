@@ -22,23 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef IVY_PROGRAM_H
-#define IVY_PROGRAM_H
+#ifndef IVY_SHADERPROGRAM_H
+#define IVY_SHADERPROGRAM_H
 
 #include <string>
 
-#include "../IO/File.h"
-#include "Renderer.h"
+#include "../../IO/File.h"
+#include "../Renderer.h"
 
 namespace Ivy {
     namespace Graphics {
-        class IVY_API Program {
+        class IVY_API ShaderProgram {
         public:
-            Program(std::string vertexShaderPath, std::string fragmentShaderPath) {
+            ShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath) {
                 this->m_VertexShaderPath = vertexShaderPath;
                 this->m_FragmentShaderPath = fragmentShaderPath;
             }
-            ~Program();
+            ~ShaderProgram();
 
             bool Create(void);
             void Destroy(void);
@@ -74,4 +74,4 @@ namespace Ivy {
     }
 }
 
-#endif // IVY_PROGRAM_H
+#endif // IVY_SHADERPROGRAM_H

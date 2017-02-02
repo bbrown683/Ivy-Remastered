@@ -27,7 +27,7 @@ SOFTWARE.
 
 namespace Ivy {
     namespace Graphics {
-        class PivotCamera : public ICamera {
+        class IVY_API PivotCamera : public ICamera {
             virtual bool Create(void) override;
             virtual glm::vec3 GetCameraPosition(void) override;
             virtual void SetCameraPosition(glm::vec3 position) override;

@@ -31,7 +31,7 @@ SOFTWARE.
 
 namespace Ivy {
     namespace Graphics {
-        class ModelMatrix {
+        class IVY_API ModelMatrix {
             GLint m_Location;
             glm::mat4 m_Matrix;
 

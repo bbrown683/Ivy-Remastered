@@ -31,7 +31,7 @@ SOFTWARE.
 
 namespace Ivy {
     namespace Graphics {
-        class ProjectionMatrix {
+        class IVY_API ProjectionMatrix {
             GLint Location;
             glm::mat4 Matrix;
 

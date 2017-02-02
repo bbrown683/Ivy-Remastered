@@ -5,7 +5,7 @@
 
 namespace Ivy {
     namespace Graphics {
-        class DepthStencil {
+        class IVY_API DepthStencil {
             void State(GLenum buffer, bool flag);
         };
     }

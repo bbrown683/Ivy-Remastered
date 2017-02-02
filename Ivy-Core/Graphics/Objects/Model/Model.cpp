@@ -38,48 +38,41 @@ bool Ivy::Graphics::Model::Load(std::string filePath) {
         return false;
     }
 
-    for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
-        aiMesh* mesh = scene->mMeshes[i];
+    for (unsigned int meshID = 0; meshID < scene->mNumMeshes; meshID++) {
+        aiMesh* mesh = scene->mMeshes[meshID];
 
         // Components of a mesh.
         std::vector<Vertex> vertices;
         std::vector<GLushort> indices;
-        std::vector<Texture> textures;
+        std::vector<Texture2D> textures;
 
-        // Grab the vertex position and colors for the mesh.
-        for (unsigned int j = 0; j < mesh->mNumVertices; j++) {
+        // Gather per-vertex data, eg: position, colors, normals, and texture coordinates.
+        for (unsigned int vertID = 0; vertID < mesh->mNumVertices; vertID++) {
             Vertex vertex;
 
             if (mesh->HasPositions()) {
-                aiVector3D position = mesh->mVertices[j];
+                aiVector3D position = mesh->mVertices[vertID];
                 vertex.m_Position = glm::vec3(position.x, position.y, position.z);
             }
             else
                 vertex.m_Position = glm::vec3();
             
+            // Iterate through the colors.
             for (unsigned int numColorChannels = 0; numColorChannels < mesh->GetNumColorChannels(); 
                 numColorChannels++) {
-                if (numColorChannels == 0) {
-                    aiColor4D color0 = mesh->mColors[0][j];
-                    vertex.m_Color0 = glm::vec4(color0.r, color0.g, color0.b, color0.a);
-                }
-                else
-                    vertex.m_Color0 = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+                    aiColor4D color = mesh->mColors[numColorChannels][vertID];
+                    vertex.m_Color[numColorChannels] = glm::vec4(color.r, color.g, color.b, color.a);
+            }
 
-                if (numColorChannels == 1) {
-                    aiColor4D color0 = mesh->mColors[1][j];
-                    vertex.m_Color0 = glm::vec4(color0.r, color0.g, color0.b, color0.a);
-                }
+            // Iterate through the various texture coords.
+            for (unsigned int numUVChannels = 0; numUVChannels < mesh->GetNumUVChannels();
+                numUVChannels++) {
+                aiVector3D uv = mesh->mTextureCoords[numUVChannels][vertID];
+                vertex.m_TexCoords[numUVChannels] = glm::vec2(uv.x, uv.y);
             }
-            if (mesh->HasTextureCoords(0)) {
-                aiVector3D texCoord0 = mesh->mTextureCoords[0][j];
-                vertex.m_TexCoord0 = glm::vec2(texCoord0.x, texCoord0.y);
-            }
-            else
-                vertex.m_TexCoord0 = glm::vec2();
 
             if (mesh->HasNormals()) {
-                aiVector3D normal = mesh->mNormals[j];
+                aiVector3D normal = mesh->mNormals[vertID];
                 vertex.m_Normal = glm::vec3(normal.x, normal.y, normal.z);
             }
             else
@@ -90,11 +83,11 @@ bool Ivy::Graphics::Model::Load(std::string filePath) {
 
         if (mesh->HasFaces()) {
             // Grab the indices for the mesh.
-            for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
-                aiFace face = mesh->mFaces[j];
+            for (unsigned int faceID = 0; faceID < mesh->mNumFaces; faceID++) {
+                aiFace face = mesh->mFaces[faceID];
 
-                for (unsigned int k = 0; k < face.mNumIndices; k++)
-                    indices.push_back(face.mIndices[k]);
+                for (unsigned int indexID = 0; indexID < face.mNumIndices; indexID++)
+                    indices.push_back(face.mIndices[indexID]);
             }
         }
 
@@ -103,14 +96,14 @@ bool Ivy::Graphics::Model::Load(std::string filePath) {
             aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
             // Iterate though each texture type if they exist.
-            for (unsigned int j = 0; j < material->GetTextureCount(aiTextureType_DIFFUSE); j++) {
+            for (unsigned int textureID = 0; textureID < material->GetTextureCount(aiTextureType_DIFFUSE); textureID++) {
                 // Get the texture for the material.
                 aiString string;
-                material->GetTexture(aiTextureType_DIFFUSE, j, &string);
-                textures.push_back(Texture(string.C_Str(), GL_RGBA));
+                material->GetTexture(aiTextureType_DIFFUSE, textureID, &string);
+                textures.push_back(Texture2D(m_Program, string.C_Str(), textures.size()));
             }     
         } 
-        m_Meshes.push_back(TestMesh(m_Program, vertices, indices, textures));
+        m_Meshes.push_back(Mesh(m_Program, vertices, indices, textures));
     }
 
     // Create our meshes.

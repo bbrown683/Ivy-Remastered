@@ -25,9 +25,11 @@ SOFTWARE.
 #ifndef IVY_IWIDGET_H
 #define IVY_IWIDGET_H
 
+#include "../../Symbols.h"
+
 namespace Ivy {
     namespace Graphics {
-        struct IWidget {
+        struct IVY_API IWidget {
 
         };
     }

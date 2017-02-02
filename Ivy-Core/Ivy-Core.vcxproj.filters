@@ -3,16 +3,11 @@
   <ItemGroup>
     <ClInclude Include="Window.h" />
     <ClInclude Include="Symbols.h" />
-    <ClInclude Include="Graphics\Model.h" />
     <ClInclude Include="Graphics\Renderer.h" />
-    <ClInclude Include="Graphics\Program.h" />
-    <ClInclude Include="Graphics\Texture.h" />
-    <ClInclude Include="Graphics\Mesh.h" />
     <ClInclude Include="Graphics\UniformBuffer.h" />
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Graphics\Colors.h" />
-    <ClInclude Include="Graphics\TestMesh.h" />
     <ClInclude Include="Graphics\Textures\ITexture.h" />
     <ClInclude Include="Graphics\Textures\CubeMap.h" />
     <ClInclude Include="Graphics\Textures\Texture2D.h" />
@@ -35,24 +30,23 @@
     <ClInclude Include="Graphics\Objects\Cameras\ICamera.h" />
     <ClInclude Include="Graphics\Objects\Cameras\PivotCamera.h" />
     <ClInclude Include="Graphics\Textures\Atlas.h" />
-    <ClInclude Include="Graphics\Objects\Sprite.h" />
     <ClInclude Include="Graphics\Objects\Sources\LightSource\LightSource.h" />
     <ClInclude Include="Graphics\Objects\Sources\AudioSource\AudioSource.h" />
     <ClInclude Include="Graphics\DepthStencil.h" />
+    <ClInclude Include="Graphics\Objects\Listener\AudioListener.h" />
+    <ClInclude Include="Graphics\Objects\Model\Model.h" />
+    <ClInclude Include="Graphics\Objects\Sprite\Sprite.h" />
+    <ClInclude Include="Graphics\Objects\Model\Mesh.h" />
+    <ClInclude Include="Graphics\Shaders\ShaderProgram.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Graphics\Model.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
-    <ClCompile Include="Graphics\Program.cpp" />
-    <ClCompile Include="Graphics\Mesh.cpp" />
     <ClCompile Include="Graphics\UniformBuffer.cpp" />
-    <ClCompile Include="Graphics\Texture.cpp" />
     <ClCompile Include="IO\File.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\Colors.cpp" />
-    <ClCompile Include="Graphics\TestMesh.cpp" />
     <ClCompile Include="Graphics\Textures\CubeMap.cpp" />
     <ClCompile Include="Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
@@ -64,6 +58,9 @@
     <ClCompile Include="Graphics\Objects\Cameras\PivotCamera.cpp" />
     <ClCompile Include="Graphics\Textures\Atlas.cpp" />
     <ClCompile Include="Graphics\DepthStencil.cpp" />
+    <ClCompile Include="Graphics\Objects\Model\Model.cpp" />
+    <ClCompile Include="Graphics\Objects\Model\Mesh.cpp" />
+    <ClCompile Include="Graphics\Shaders\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />

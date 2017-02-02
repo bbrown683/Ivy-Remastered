@@ -27,9 +27,11 @@ SOFTWARE.
 
 #include "glm/glm.hpp"
 
+#include "../../../Symbols.h"
+
 namespace Ivy {
     namespace Graphics {
-        struct ICamera {
+        struct IVY_API ICamera {
         public:
             virtual bool Create(void) = 0;
             virtual glm::vec3 GetCameraPosition(void) = 0;

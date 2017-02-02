@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "TestMesh.h"
+#include "Mesh.h"
 
-void Ivy::Graphics::TestMesh::Create(void) {
+void Ivy::Graphics::Mesh::Create(void) {
     m_VertexBuffer.SetData(m_Vertices);
     m_ElementBuffer.SetData(m_Indices);
 
@@ -33,36 +33,39 @@ void Ivy::Graphics::TestMesh::Create(void) {
 
     m_UniformBuffer.GetModelLocation();
 
-    if (m_Textures.size() > 0)
-        m_Textures[0].CreateFromFile(m_Program);
+    for (unsigned int i = 0; i < m_Textures.size(); i++)
+        m_Textures[i].Create();
 }
 
-void Ivy::Graphics::TestMesh::Draw(void) {
+void Ivy::Graphics::Mesh::Draw(void) {
     m_Program->MakeActive();
 
     m_VertexBuffer.Bind();
     m_ElementBuffer.Bind();
     m_UniformBuffer.SetModelMatrix(m_Translation * m_Rotation * m_Scale);
 
-    if (m_Textures.size() > 0)
-        m_Textures[0].MakeActive();
+    for (unsigned int i = 0; i < m_Textures.size(); i++)
+        m_Textures[i].MakeActive();
 
     m_ElementBuffer.Draw();
 
     m_VertexBuffer.Unbind();
     m_ElementBuffer.Unbind();
 
+    for (unsigned int i = 0; i < m_Textures.size(); i++)
+        m_Textures[i].MakeInactive();
+
     m_Program->MakeInactive();
 }
 
-void Ivy::Graphics::TestMesh::SetPosition(glm::vec3 position) {
+void Ivy::Graphics::Mesh::SetPosition(glm::vec3 position) {
     m_Translation = glm::translate(m_Translation, position);
 }
 
-void Ivy::Graphics::TestMesh::SetRotation(glm::vec3 rotation) {
+void Ivy::Graphics::Mesh::SetRotation(glm::vec3 rotation) {
     m_Rotation = glm::rotate(m_Rotation, 0.025f, rotation);
 }
 
-void Ivy::Graphics::TestMesh::SetScale(glm::vec3 scale) {
+void Ivy::Graphics::Mesh::SetScale(glm::vec3 scale) {
     m_Scale = glm::scale(m_Scale, scale);
 }

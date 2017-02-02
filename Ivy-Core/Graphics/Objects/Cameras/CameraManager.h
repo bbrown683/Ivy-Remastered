@@ -26,13 +26,12 @@ SOFTWARE.
 #define IVY_CAMERAMANAGER_H
 
 #include <queue>
-#include <map>
 
 #include "ICamera.h"
 
 namespace Ivy {
     namespace Graphics {
-        class CameraManager {
+        class IVY_API CameraManager {
         public:
             void PushCamera(unsigned int layerID, ICamera* camera);
             void PopCamera();
