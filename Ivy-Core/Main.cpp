@@ -12,6 +12,7 @@ int main(int argc, char** argv)
     {
         Renderer renderer(8, 8, 8, 8, 24, 8, 0, false, true, false);
         renderer.Create(window.GetPlatformWindow(), window.GetPlatformDisplay());
+        renderer.EnableCapability(GL_CULL_FACE);
         renderer.SetCullMode(GL_BACK);
 
         ShaderProgram program("vert.txt", "frag.txt");
@@ -46,7 +47,6 @@ int main(int argc, char** argv)
             model2.Draw();
             model3.Draw();
             model4.Draw();
-
 
             model2.SetRotation(glm::vec3(1.0f, 1.0f, 0.0f));
             model3.SetRotation(glm::vec3(0.0f, 1.0f, 0.0f));

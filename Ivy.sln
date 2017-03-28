@@ -5,10 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ivy-Core", "Ivy-Core\Ivy-Core.vcxproj", "{61A8E9A3-18CC-48A4-8C18-28FA68272C15}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ivy-Game", "Ivy-Game\Ivy-Game.vcxproj", "{351B263D-4EF5-4588-BE0F-F5DD08599417}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IvyEditor", "IvyEditor\IvyEditor.vcxproj", "{C0E7B5A6-BE16-4F06-A43A-896A8E424083}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,22 +21,6 @@ Global
 		{61A8E9A3-18CC-48A4-8C18-28FA68272C15}.Release|Win32.Build.0 = Release|Win32
 		{61A8E9A3-18CC-48A4-8C18-28FA68272C15}.Release|x64.ActiveCfg = Release|x64
 		{61A8E9A3-18CC-48A4-8C18-28FA68272C15}.Release|x64.Build.0 = Release|x64
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Debug|Win32.ActiveCfg = Debug|Win32
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Debug|Win32.Build.0 = Debug|Win32
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Debug|x64.ActiveCfg = Debug|x64
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Debug|x64.Build.0 = Debug|x64
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Release|Win32.ActiveCfg = Release|Win32
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Release|Win32.Build.0 = Release|Win32
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Release|x64.ActiveCfg = Release|x64
-		{351B263D-4EF5-4588-BE0F-F5DD08599417}.Release|x64.Build.0 = Release|x64
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Debug|Win32.Build.0 = Debug|Win32
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Debug|x64.ActiveCfg = Debug|x64
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Debug|x64.Build.0 = Debug|x64
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Release|Win32.ActiveCfg = Release|Win32
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Release|Win32.Build.0 = Release|Win32
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Release|x64.ActiveCfg = Release|x64
-		{C0E7B5A6-BE16-4F06-A43A-896A8E424083}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

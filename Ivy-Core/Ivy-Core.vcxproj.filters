@@ -15,9 +15,6 @@
     <ClInclude Include="Graphics\Buffers\IBuffer.h" />
     <ClInclude Include="Graphics\Objects\Skybox\Skybox.h" />
     <ClInclude Include="Graphics\Objects\IObject.h" />
-    <ClInclude Include="Graphics\UI\UIManager.h" />
-    <ClInclude Include="Graphics\UI\IWidget.h" />
-    <ClInclude Include="Graphics\Objects\Text\Text.h" />
     <ClInclude Include="Graphics\Matrices\ModelMatrix.h" />
     <ClInclude Include="Graphics\Matrices\ProjectionMatrix.h" />
     <ClInclude Include="Graphics\Matrices\ViewMatrix.h" />
@@ -33,11 +30,17 @@
     <ClInclude Include="Graphics\Objects\Sources\LightSource\LightSource.h" />
     <ClInclude Include="Graphics\Objects\Sources\AudioSource\AudioSource.h" />
     <ClInclude Include="Graphics\DepthStencil.h" />
-    <ClInclude Include="Graphics\Objects\Listener\AudioListener.h" />
     <ClInclude Include="Graphics\Objects\Model\Model.h" />
-    <ClInclude Include="Graphics\Objects\Sprite\Sprite.h" />
     <ClInclude Include="Graphics\Objects\Model\Mesh.h" />
     <ClInclude Include="Graphics\Shaders\ShaderProgram.h" />
+    <ClInclude Include="Graphics\Accessor.h" />
+    <ClInclude Include="Graphics\Buffer.h" />
+    <ClInclude Include="Graphics\Material.h" />
+    <ClInclude Include="Graphics\Sampler.h" />
+    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="IO\Image.h" />
+    <ClInclude Include="Graphics\GraphicsInclude.h" />
+    <ClInclude Include="Graphics\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp" />
@@ -51,7 +54,6 @@
     <ClCompile Include="Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Graphics\Objects\Skybox\Skybox.cpp" />
-    <ClCompile Include="Graphics\Objects\Text\Text.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffers\ElementBuffer.cpp" />
     <ClCompile Include="Graphics\Objects\Cameras\CameraManager.cpp" />

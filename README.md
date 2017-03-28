@@ -5,5 +5,6 @@
 * Assimp
 * GLM
 * Miniz
-* STB
-* Nuklear
+* FreeImage
+* FreeType
+* PortAudio
