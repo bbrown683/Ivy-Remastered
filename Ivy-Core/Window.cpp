@@ -1,118 +1,43 @@
 #include "Window.h"
+#include <iostream>
 
-bool Window::PollWindowEvents()
-{
-    MSG msg;
-    while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE))
-    {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return true;
-}
-
-void Window::Close()
-{
-    RemoveProp(hWnd, TEXT("WINDOW"));
-    UnregisterWindowClass();
-    DestroyWindow(hWnd);
-    open = false;
-}
-
-HDC Window::GetPlatformDisplay()
-{
-    return hDC;
-}
-
-HWND Window::GetPlatformWindow()
-{
-    return hWnd;
-}
-
-bool Window::Create()
-{
-    HINSTANCE hInstance = GetModuleHandle(nullptr);
-
-    if (RegisterWindowClass(hInstance))
-    {
-        DWORD dwStyle = WS_OVERLAPPEDWINDOW;
-
-        HWND hWnd = CreateWindowA(TEXT("IVY_APP"), title.c_str(), dwStyle,
-            x, y, width, height, nullptr, nullptr, hInstance, nullptr);
-
-        if (!hWnd)
-            return false;
-
-        ShowWindow(hWnd, SW_SHOW);
-        UpdateWindow(hWnd);
-
-        this->hDC = GetDC(hWnd);
-        this->hWnd = hWnd;
-        this->x = x;
-        this->y = y;
-        this->width = width;
-        this->height = height;
-        this->title = title;
-
-        // This will allow us to store the reference inside the Window Procedure.
-        SetProp(hWnd, TEXT("WINDOW"), this);
-
-        return open = true;
-    }
-
+bool Ivy::Window::Create() {
+  if (!glfwInit())
     return false;
+
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+  glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+  glfw_window_ = glfwCreateWindow(1080, 720, "Test", nullptr, nullptr);
+  if (!glfw_window_) {
+      glfwTerminate();
+      return false;
+  }
+
+  glfwSetWindowUserPointer(glfw_window_, this);
+  glfwSetWindowSizeCallback(glfw_window_, reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfw_window_))->OnResize);
+  glfwMakeContextCurrent(glfw_window_);
+  return true;
 }
 
-bool Window::RegisterWindowClass(HINSTANCE hInstance)
-{
-    WNDCLASSEX wcex;
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-    wcex.lpfnWndProc = WindowProcedure;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground = reinterpret_cast<HBRUSH>(NULL_BRUSH);
-    wcex.lpszMenuName = nullptr;
-    wcex.lpszClassName = TEXT("IVY_APP");
-    wcex.hIconSm = LoadIcon(hInstance, IDI_APPLICATION);
-
-    if (!RegisterClassEx(&wcex))
-        return false;
-
-    return true;
+void Ivy::Window::OnResize(GLFWwindow* window, int width, int height) {
+    std::cout << width << "x" << height << std::endl;
 }
 
-void Window::UnregisterWindowClass()
-{
-    UnregisterClass(TEXT("IVY_APP"), GetModuleHandle(nullptr));
-}
-
-LRESULT Window::WindowEventHandler(UINT msg, WPARAM wParam, LPARAM lParam)
-{
-    switch (msg)
+void Ivy::Window::PollEvents() {
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(glfw_window_))
     {
-    case WM_CLOSE:
-        Close();
-        break;
-    default:
-        return DefWindowProc(hWnd, msg, wParam, lParam);
+        /* Render here */
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        /* Swap front and back buffers */
+        glfwSwapBuffers(glfw_window_);
+
+        /* Poll for and process events */
+        glfwPollEvents();
     }
-    return 0;
-}
 
-LRESULT Window::WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-    // Retieve a pointer to the window.
-    Window* window = reinterpret_cast<Window*>(GetProp(hWnd, TEXT("WINDOW")));
-
-    // Pointer will be null until window is "fully constructed."
-    if (!window)
-        return DefWindowProc(hWnd, msg, wParam, lParam);
-
-    // Once the pointer exists we can call our own event handler for the object.
-    return window->WindowEventHandler(msg, wParam, lParam);
+    glfwTerminate();
 }

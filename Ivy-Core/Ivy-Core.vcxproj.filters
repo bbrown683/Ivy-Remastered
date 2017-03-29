@@ -43,7 +43,6 @@
     <ClInclude Include="Graphics\Shader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Window.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
     <ClCompile Include="Graphics\UniformBuffer.cpp" />
@@ -63,6 +62,7 @@
     <ClCompile Include="Graphics\Objects\Model\Model.cpp" />
     <ClCompile Include="Graphics\Objects\Model\Mesh.cpp" />
     <ClCompile Include="Graphics\Shaders\ShaderProgram.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />

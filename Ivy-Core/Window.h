@@ -1,53 +1,31 @@
-#ifndef IVY_WINDOW_H
-#define IVY_WINDOW_H
+#ifndef __WINDOW_H__
+#define __WINDOW_H__
 
-#include <Windows.h>
-#include <string>
-#include <queue>
+#include <functional>
+#include <GLFW/glfw3.h>
 
-class Window
-{
-    HDC hDC;
-    HWND hWnd;
-
-    unsigned int width;
-    unsigned int height;
-    int x;
-    int y;
-    std::string title;
-    bool fullscreen;
-
-public:
-
-    bool open = false;
-
-    bool PollWindowEvents();
-    void Close();
-    HDC GetPlatformDisplay();
-    HWND GetPlatformWindow();
-    bool Create();
-
-    Window(unsigned int width, unsigned int height, int x, int y,
-        std::string title, bool fullscreen)
+namespace Ivy {
+class Window {
+ public:
+  Window(int width, int height) 
+    : width_(width), 
+      height_(height) 
     {
-        this->width = width;
-        this->height = height;
-        this->x = x;
-        this->y = y;
-        this->title = title;
-        this->fullscreen = fullscreen;
     }
 
-    ~Window()
-    {
-        if (open)
-            Window::Close();
-    }
+  bool Create();
+  void OnResize(GLFWwindow* window, int width, int height);
+  void PollEvents();
 
-    bool RegisterWindowClass(HINSTANCE hInstance);
-    void UnregisterWindowClass();
-    LRESULT WindowEventHandler(UINT msg, WPARAM wParam, LPARAM lParam);
-    static LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+ private:
+  std::function<void(GLFWwindowsizefun)> resize_callback_;
+
+  int width_;
+  int height_;
+  int x_;
+  int y_;
+  GLFWwindow* glfw_window_;
 };
+}
 
-#endif // IVY_WINDOW_H
+#endif

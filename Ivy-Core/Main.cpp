@@ -2,11 +2,20 @@
 #include "Graphics/Camera.h"
 #include "Graphics/Objects/Model/Model.h"
 #include "Graphics/Colors.h"
+#include "GLFW/glfw3.h"
 
 using namespace Ivy::Graphics;
 
-int main(int argc, char** argv)
-{
+void ResizeCallback(GLFWwindow* window, int width, int height) {
+    std::cout << "@Width: " << width << "\n@Height: " << height << std::endl;
+}
+
+int main(int argc, char** argv) {    
+    Ivy::Window window(1080, 720);
+    window.Create();
+    window.PollEvents();
+
+    /*
     Window window(1080, 720, 100, 100, "Ivy", false);
     if (window.Create())
     {
@@ -56,6 +65,7 @@ int main(int argc, char** argv)
             window.PollWindowEvents();
         }
     }
+    */
 
     return 0;
 }

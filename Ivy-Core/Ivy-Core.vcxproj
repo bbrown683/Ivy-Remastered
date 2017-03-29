@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\ANGLE\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\glm\include\;$(SolutionDir)Dependencies\miniz\;$(SolutionDir)Dependencies\FreeImage\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\ANGLE\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\glm\include\;$(SolutionDir)Dependencies\miniz\;$(SolutionDir)Dependencies\FreeImage\include\;$(SolutionDir)Dependencies\glfw\include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>IVY_STATIC_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Lib>
@@ -84,8 +84,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;assimp.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\$(PlatformTarget)\;$(SolutionDir)Dependencies\FreeImage\lib\$(PlatformTarget)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;assimp.lib;FreeImage.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ANGLE\lib\;$(SolutionDir)Dependencies\assimp\lib\$(PlatformTarget)\;$(SolutionDir)Dependencies\FreeImage\lib\$(PlatformTarget)\;$(SolutionDir)Dependencies\glfw\lib\</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
