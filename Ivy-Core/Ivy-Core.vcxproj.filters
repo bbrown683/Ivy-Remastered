@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Window.h" />
     <ClInclude Include="Symbols.h" />
     <ClInclude Include="Graphics\Renderer.h" />
     <ClInclude Include="Graphics\UniformBuffer.h" />
@@ -41,6 +40,11 @@
     <ClInclude Include="IO\Image.h" />
     <ClInclude Include="Graphics\GraphicsInclude.h" />
     <ClInclude Include="Graphics\Shader.h" />
+    <ClInclude Include="System\Keyboard.h" />
+    <ClInclude Include="System\Mouse.h" />
+    <ClInclude Include="System\Joystick.h" />
+    <ClInclude Include="System\Window.h" />
+    <ClInclude Include="System\GameWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -62,7 +66,8 @@
     <ClCompile Include="Graphics\Objects\Model\Model.cpp" />
     <ClCompile Include="Graphics\Objects\Model\Mesh.cpp" />
     <ClCompile Include="Graphics\Shaders\ShaderProgram.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="System\Window.cpp" />
+    <ClCompile Include="System\GameWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />

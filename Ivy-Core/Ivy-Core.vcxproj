@@ -188,6 +188,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="System\GameWindow.h" />
     <ClInclude Include="Graphics\Accessor.h" />
     <ClInclude Include="Graphics\Buffer.h" />
     <ClInclude Include="Graphics\Camera.h" />
@@ -227,9 +228,13 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
     <ClInclude Include="Graphics\UniformBuffer.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffers\Vertex.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="System\Joystick.h" />
+    <ClInclude Include="System\Keyboard.h" />
+    <ClInclude Include="System\Mouse.h" />
+    <ClInclude Include="System\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="System\GameWindow.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\DepthStencil.cpp" />
     <ClCompile Include="Graphics\Objects\Cameras\CameraManager.cpp" />
@@ -249,7 +254,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
     <ClCompile Include="Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="System\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="frag.txt" />
