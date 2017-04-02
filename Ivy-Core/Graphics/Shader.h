@@ -29,14 +29,6 @@
 
 namespace Ivy {
 namespace Graphics {
-struct Attribute {
-
-};
-
-struct Uniform {
-
-};
-
 class Shader {
  public:
   Shader(std::string source, GLenum stage);
@@ -45,19 +37,15 @@ class Shader {
   bool Compile();
   bool Destroy();
   void Unbind();
-
+  
   GLuint get_id();
   GLenum get_stage();
   std::string get_source();
-  std::vector<Attribute> get_attributes();
-  std::vector<Uniform> get_uniforms();
 
  private:
-  GLuint id;
-  GLenum stage;
-  std::string source;
-  std::vector<Attribute> attributes;
-  std::vector<Uniform> uniforms;
+  GLuint id_;
+  GLenum stage_;
+  std::string source_;
 };
 }
 }

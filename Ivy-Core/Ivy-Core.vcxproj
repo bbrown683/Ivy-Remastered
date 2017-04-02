@@ -188,8 +188,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\Program.h" />
     <ClInclude Include="System\GameWindow.h" />
-    <ClInclude Include="Graphics\Accessor.h" />
     <ClInclude Include="Graphics\Buffer.h" />
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Graphics\GraphicsInclude.h" />
@@ -207,9 +207,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
     <ClInclude Include="Graphics\Objects\Sources\LightSource\LightSource.h" />
     <ClInclude Include="Graphics\Objects\Skybox\Skybox.h" />
     <ClInclude Include="Graphics\DepthStencil.h" />
-    <ClInclude Include="Graphics\Sampler.h" />
     <ClInclude Include="Graphics\Shader.h" />
-    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Graphics\Sampler.h" />
     <ClInclude Include="Graphics\Textures\CubeMap.h" />
     <ClInclude Include="Graphics\Textures\ITexture.h" />
     <ClInclude Include="Graphics\Textures\Atlas.h" />
@@ -234,9 +233,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)Dependencies\assimp\bi
     <ClInclude Include="System\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Program.cpp" />
     <ClCompile Include="System\GameWindow.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
-    <ClCompile Include="Graphics\DepthStencil.cpp" />
     <ClCompile Include="Graphics\Objects\Cameras\CameraManager.cpp" />
     <ClCompile Include="Graphics\Colors.cpp" />
     <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />

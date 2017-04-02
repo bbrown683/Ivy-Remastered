@@ -32,11 +32,8 @@
     <ClInclude Include="Graphics\Objects\Model\Model.h" />
     <ClInclude Include="Graphics\Objects\Model\Mesh.h" />
     <ClInclude Include="Graphics\Shaders\ShaderProgram.h" />
-    <ClInclude Include="Graphics\Accessor.h" />
     <ClInclude Include="Graphics\Buffer.h" />
     <ClInclude Include="Graphics\Material.h" />
-    <ClInclude Include="Graphics\Sampler.h" />
-    <ClInclude Include="Graphics\Texture.h" />
     <ClInclude Include="IO\Image.h" />
     <ClInclude Include="Graphics\GraphicsInclude.h" />
     <ClInclude Include="Graphics\Shader.h" />
@@ -45,6 +42,8 @@
     <ClInclude Include="System\Joystick.h" />
     <ClInclude Include="System\Window.h" />
     <ClInclude Include="System\GameWindow.h" />
+    <ClInclude Include="Graphics\Program.h" />
+    <ClInclude Include="Graphics\Sampler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -62,12 +61,12 @@
     <ClCompile Include="Graphics\Objects\Cameras\CameraManager.cpp" />
     <ClCompile Include="Graphics\Objects\Cameras\PivotCamera.cpp" />
     <ClCompile Include="Graphics\Textures\Atlas.cpp" />
-    <ClCompile Include="Graphics\DepthStencil.cpp" />
     <ClCompile Include="Graphics\Objects\Model\Model.cpp" />
     <ClCompile Include="Graphics\Objects\Model\Mesh.cpp" />
     <ClCompile Include="Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="System\Window.cpp" />
     <ClCompile Include="System\GameWindow.cpp" />
+    <ClCompile Include="Graphics\Program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vert.txt" />

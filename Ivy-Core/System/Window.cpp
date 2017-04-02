@@ -56,7 +56,7 @@ void Ivy::System::Window::Run() {
   /* Loop until the user closes the window */
   while (!glfwWindowShouldClose(glfw_window_ptr_))
   {
-    /* Force update event. */
+    /* Force Refresh event for user to send draw commands. */
     OnRefresh(glfw_window_ptr_);
 
     /* Swap front and back buffers */

@@ -34,8 +34,6 @@ class GameWindow : public Window {
   {
   }
 
-  ~GameWindow() { std::cout << "Closing GameWindow." << std::endl; }
-
  private:
   // Inherited via Window
   virtual void OnClose(GLFWwindow* glfw_window_ptr) override;
